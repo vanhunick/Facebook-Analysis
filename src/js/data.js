@@ -42,8 +42,30 @@ function handleFileSelect(evt) {
       names.push(id);
     }
 
-    // Print out the names
-    console.log(names);
+  var entry = {
+    word: "",
+    count: 0
+  };
+
+
+  // Grab all messages
+  var messages = dataElem.getElementsByTagName('p');
+
+  let wordMap = {};
+
+
+  for(let i = 0; i < messages.length; i++){
+    let ms = messages[i].innerHTML;
+    let words = ms.split(" ");
+    constructMap(wordMap,words);
+  }
+
+    for(var key in wordMap){
+      // console.log(entry);
+      if(wordMap[key] > 100){
+        console.log(key + " Count: " + wordMap[key]);
+      }
+    }
   }
 
   // Only read the first file
@@ -51,3 +73,28 @@ function handleFileSelect(evt) {
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+function createWordCountTable(data, numbRows){
+
+  //First grab to table to add to
+  var wordTable = document.getElementById("wordTable");
+
+  for(var i = 0; i < numbRows; i++){
+    var row = table.insertRow(i);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = data[i].word;
+    cell2.innerHTML = data[i].count;
+  }
+}
+
+function constructMap(map, words){
+  for(let i = 0; i < words.length; i++){
+    let word = words[i];
+    if(map[word] === undefined){
+      map[word] = 0;
+    }
+    map[word]++;// Increment count for word
+  }
+  return map;
+}
