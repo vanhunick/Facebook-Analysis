@@ -42,7 +42,7 @@ function handleFileSelect(evt) {
       names.push(id);
     }
 
-  var entry = {
+  const entry = {
     word: "",
     count: 0
   };
@@ -60,13 +60,28 @@ function handleFileSelect(evt) {
     constructMap(wordMap,words);
   }
 
+    let wordArray = [];
     for(var key in wordMap){
-      // console.log(entry);
-      if(wordMap[key] > 100){
-        console.log(key + " Count: " + wordMap[key]);
+        let newEntry = Object.create(entry);
+        newEntry.word = key;
+        newEntry.count = wordMap[key];
+        wordArray.push(newEntry);
+    }
+    wordArray.sort(function(a, b){return a.count-b.count});
+
+    console.log("Max " + wordArray[wordArray.length-1].word + ": " + wordArray[wordArray.length-1].count);
+    console.log("Min " + wordArray[0].word + ": " + wordArray[0].count);
+
+
+    for(let i = wordArray.length-1; i > 0; i--){
+      if(wordArray[i].count > 1){
+        console.log(wordArray[i].word + ": " + wordArray[i].count);
       }
     }
   }
+
+
+
 
   // Only read the first file
   reader.readAsText(files[0]);
