@@ -10,6 +10,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='../css/index.css' />
+  
+  <script src="../js/jq.js"></script>
 
 
 </head>
@@ -30,13 +32,13 @@
     </label>
 
     <!--File loading bar-->
-    <div class="progress">
+    <div class="progress" id="lf">
       <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
         style="width:0%" id="loadFile"></div>
     </div>
 
     <!--Data Structure loading bar-->
-    <div class="progress">
+    <div class="progress" id="ld">
       <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
         style="width:0%" id="loadData"></div>
     </div>
