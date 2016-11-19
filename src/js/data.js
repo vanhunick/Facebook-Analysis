@@ -21,16 +21,23 @@ function handleFileSelect(evt) {
   document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 
   var reader = new FileReader();
+  reader.onprogress = updateProgress;
+
 
   // Wait for the file to be read
   reader.onload = function(e) {
+    let elem = document.getElementById("loadFile");
+            elem.style.width = 100 + '%';
+        elem.textContent = 100 + '%';
+
+    
     var text = reader.result; // The text in the file as a string
     var dataElem = document.createElement( 'html' );
     dataElem.innerHTML = text; // Create element to work with
     threads = dataElem.getElementsByClassName('thread');
 
     console.log("Starting Creation of data structure");
-    asyncLoop();
+    // asyncLoop();
     let fancyStruct = createWorkableDataStructure();
     console.log("Finished Creation of data structure");
 
@@ -236,6 +243,10 @@ function createWorkableDataStructure(){
       lastLoadPercentage = percentDone;
       percentage = percentDone;
       // incrementLoad(percentDone);
+      
+        var elem = document.getElementById("loadData");
+    elem.style.width = percentage + '%';
+    elem.textContent = percentage + '%';
     }
     
     thread.innerHTML = threads[i].innerHTML;
@@ -264,6 +275,11 @@ function createWorkableDataStructure(){
     setTimeout(createWorkableDataStructure,0);
       i++; 
   }
+  if(i === threads.length){var elem = document.getElementById("loadData");
+    elem.style.width = 100 + '%';
+    elem.textContent = 100 + '%';
+  }
+      
 }
 
 
@@ -298,3 +314,16 @@ function asyncLoop() {
         setTimeout(asyncLoop, 50);
     }
 }
+
+  function updateProgress(evt) {
+    let elem = document.getElementById("loadFile");
+    // evt is an ProgressEvent.
+    if (evt.lengthComputable) {
+      var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+      // Increase the progress bar length.
+      if (percentLoaded < 100) {
+        elem.style.width = percentLoaded + '%';
+        elem.textContent = percentLoaded + '%';
+      }
+    }
+  }
