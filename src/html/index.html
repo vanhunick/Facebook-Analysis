@@ -33,8 +33,11 @@ th, td {
     <h3>Facebook data analiser</h3>
   </div>
 
-  <div class="container">
-    <input type="file" id="files" name="files[]" multiple />
+  <div class="container text-center">
+        <label class="btn btn-primary">
+                Select File&hellip;
+    <input type="file" id="files" name="files[]" multiple style="display: none;" />
+        </label>
     <output id="list"></output>
     
     <div class="progress">
