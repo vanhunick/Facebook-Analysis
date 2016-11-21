@@ -54,6 +54,7 @@ function handleFileSelect(evt) {
     threads = dataElem.getElementsByClassName('thread');
 
     dataStruct = createWorkableDataStructure();
+    Console.log("Done : " + dataStruct.length);
   }
 
 
@@ -106,8 +107,8 @@ function createWordMap(dataElem) {
 // Creates a map where word is the key and value is the count
 function createYearCountMap(dataElem) {
   let entry = {
-    year: "",
-    count: 0
+    letter: "",
+    frequency: 0
   };
 
   let yearMap = {};
@@ -123,8 +124,8 @@ function createYearCountMap(dataElem) {
   let wordArray = [];
   for (var key in yearMap) {
     let newEntry = Object.create(entry);
-    newEntry.year = key;
-    newEntry.count = yearMap[key];
+    newEntry.letter = key;
+    newEntry.frequency = yearMap[key];
     wordArray.push(newEntry);
   }
   return wordArray;
@@ -235,9 +236,11 @@ var thread = document.createElement('div');
 var lastLoadPercentage = 0;
 var i = 0;
 
+let messageDataArray = [];
+
 // Conerts the html structure into a workable data structure
 function createWorkableDataStructure() {
-  let messageDataArray = [];
+  
 
   if (i < threads.length) {//threads.length
     let percentDone = Math.floor((i / threads.length) * 100);
@@ -259,11 +262,12 @@ function createWorkableDataStructure() {
     let messagesHead = thread.getElementsByClassName('message_header');
     let p = thread.getElementsByTagName('p');
 
-    for (let i = 0; i < messages.length; i++) {
+    
+    for (let j = 0; j < messages.length; j++) {
 
-      let timeData = getTimeData(meta[i].textContent); // Create the time data object
-      let words = getWordsFromMessage(p[i].textContent); // Get the wors in the message
-      let user = users[i].textContent; // Get the person that sent the message 
+      let timeData = getTimeData(meta[j].textContent); // Create the time data object
+      let words = getWordsFromMessage(p[j].textContent); // Get the wors in the message
+      let user = users[j].textContent; // Get the person that sent the message 
 
       let tempMessageData = new messageData(user, peopleInThread, timeData, words);
       messageDataArray.push(tempMessageData);
@@ -272,12 +276,12 @@ function createWorkableDataStructure() {
     i++;
   }
   if (i === threads.length) {// threads.length
-    console.log("Thread L " +threads.length);
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
     elemLoadData.textContent = 100 + '%';
     console.log("Creating year counts");
-    console.log(createYearCountMap(messageDataArray));
+    showYearBarGraph(createYearCountMap(messageDataArray));
+
     return messageDataArray;
   }
 

@@ -26,6 +26,7 @@ var tip = d3.tip()
     return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
   })
 
+function showYearBarGraph(dataInput){
 var svg = d3.select("#bar-mpy").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -35,14 +36,16 @@ var svg = d3.select("#bar-mpy").append("svg")
 svg.call(tip);
 
 // The new data variable.
-  var data = [
-        {letter: "2011", frequency: 636},
-        {letter: "2012", frequency: 2847},
-        {letter: "2013", frequency: 3516},
-        {letter: "2014", frequency: 2122},
-        {letter: "2015", frequency: 616},
-        {letter: "2016", frequency: 263},
-  ];
+//   var data = [
+//         {letter: "2011", frequency: 636},
+//         {letter: "2012", frequency: 2847},
+//         {letter: "2013", frequency: 3516},
+//         {letter: "2014", frequency: 2122},
+//         {letter: "2015", frequency: 616},
+//         {letter: "2016", frequency: 263},
+//   ];
+
+var data = dataInput;
 
 // The following code was contained in the callback function.
 x.domain(data.map(function(d) { return d.letter; }));
@@ -73,6 +76,9 @@ svg.selectAll(".bar")
     .attr("height", function(d) { return height - y(d.frequency); })
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
+}
+
+
 
 function type(d) {
   d.frequency = +d.frequency;
