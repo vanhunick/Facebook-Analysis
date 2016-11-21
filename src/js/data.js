@@ -81,7 +81,7 @@ function listPeople(dataStruct) {
 
 // Creates a map where word is the key and value is the count
 function createWordMap(dataElem) {
-  const entry = {
+  let entry = {
     word: "",
     count: 0
   };
@@ -100,6 +100,34 @@ function createWordMap(dataElem) {
     wordArray.push(newEntry);
   }
   wordArray.sort(function (a, b) { return a.count - b.count });
+}
+
+
+// Creates a map where word is the key and value is the count
+function createYearCountMap(dataElem) {
+  let entry = {
+    year: "",
+    count: 0
+  };
+
+  let yearMap = {};
+  
+  for (let i = 0; i < dataElem.length; i++) {
+    if(yearMap[dataElem[i].timeData.year] === undefined){
+      yearMap[dataElem[i].timeData.year] = 0;
+    }
+    console.log(dataElem[i].timeData.year);
+    yearMap[dataElem[i].timeData.year]++;
+  }
+
+  let wordArray = [];
+  for (var key in yearMap) {
+    let newEntry = Object.create(entry);
+    newEntry.year = key;
+    newEntry.count = yearMap[key];
+    wordArray.push(newEntry);
+  }
+  return wordArray;
 }
 
 
@@ -211,7 +239,7 @@ var i = 0;
 function createWorkableDataStructure() {
   let messageDataArray = [];
 
-  if (i < threads.length) {
+  if (i < threads.length) {//threads.length
     let percentDone = Math.floor((i / threads.length) * 100);
 
     if (percentDone > lastLoadPercentage) {
@@ -243,11 +271,17 @@ function createWorkableDataStructure() {
     setTimeout(createWorkableDataStructure, 0);
     i++;
   }
-  if (i === threads.length) {
+  if (i === threads.length) {// threads.length
+    console.log("Thread L " +threads.length);
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
     elemLoadData.textContent = 100 + '%';
+    console.log("Creating year counts");
+    console.log(createYearCountMap(messageDataArray));
+    return messageDataArray;
   }
+
+  
 }
 
 
