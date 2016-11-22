@@ -117,7 +117,6 @@ function createYearCountMap(dataElem) {
     if(yearMap[dataElem[i].timeData.year] === undefined){
       yearMap[dataElem[i].timeData.year] = 0;
     }
-    console.log(dataElem[i].timeData.year);
     yearMap[dataElem[i].timeData.year]++;
   }
 
@@ -256,7 +255,6 @@ function createWorkableDataStructure() {
     thread.innerHTML = threads[i].innerHTML;
 
     let peopleInThread = getPeopleInThread(thread);
-    console.log(peopleInThread);
     let users = thread.getElementsByClassName('user');
     let meta = thread.getElementsByClassName('meta');
     let messages = thread.getElementsByClassName('message');
@@ -279,14 +277,15 @@ function createWorkableDataStructure() {
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
-    elemLoadData.textContent = 100 + '%';
-    console.log("Creating year counts");
-    showYearBarGraph(createYearCountMap(messageDataArray));
-
+    elemLoadData.textContent = 100 + '%';    
     return messageDataArray;
   }
 
   
+}
+
+function genBarGraph(){
+  showYearBarGraph(createYearCountMap(messageDataArray));
 }
 
 
@@ -302,6 +301,29 @@ function updateProgress(evt) {
       elem.textContent = percentLoaded + '%';
     }
   }
+}
+
+
+function createStatisticsTable(){
+  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0;
+
+  for(let i = 0; i < messageDataArray.length; i++){
+      totMessages++;
+
+      if(messageDataArray[i].sender.toLowerCase() === "nicky van hulst"){
+        totSent++; //TODO update to use users name
+      } else {
+        totRec++;
+      }
+
+      totWords+= messageDataArray[i].words.length; 
+  }
+  console.log(totSent + " " + totRec + " " + totMessages + " " + totWords );
+
+  $('#tms').html(totSent);
+  $('#tmr').html(totRec);
+  $('#tm').html(totMessages);
+  $('#tw').html(totWords);
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
