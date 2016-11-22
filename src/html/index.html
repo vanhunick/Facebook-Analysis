@@ -5,29 +5,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha384-HzUaiJdCTIY/RL2vDPRGdEQHHahjzwoJJzGUkYjHVzTwXFQ2QN/nVgX7tzoMW3Ov" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha384-HzUaiJdCTIY/RL2vDPRGdEQHHahjzwoJJzGUkYjHVzTwXFQ2QN/nVgX7tzoMW3Ov"
+    crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <link rel='stylesheet' href='../css/index.css' />
-
   <script src="../js/jq.js"></script>
-
-
 </head>
 
 <body>
 
   <!--Header-->
   <div class="container bg-1 text-center">
-    <h1>More Information than you ever wanted</h1>
-    <h3>Facebook data analiser</h3>
 
-    <!--Upload File button-->
-    <label class="btn btn-primary">Select File&hellip;
-      <input type="file" id="files" name="files[]" multiple style="display: none;" />
+    <div class="page-header">
+      <h1>More Information than you ever wanted</h1>
+
+      <h3 id="title"><b>Facebook Data Analiser</b></h3>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 text-left">
+        <!--Upload File button-->
+        <label class="btn btn-primary" style="text-align:left">Select File&hellip;
+        <input type="file" id="files" name="files[]" multiple style="display: none;" />
     </label>
+      </div>
+      <div class="col-md-10 text-left">
+        <!--File loading bar-->
+
+      </div>
+    </div>
+
+
 
     <!--Row for loading bars-->
     <div class="row">
@@ -50,16 +62,76 @@
     </div>
 
 
+
+
+
+    <!--Row for search bar-->
     <div class="row">
-      <div class="col-md-6">
+      <div class="input-group col-md-12 text-left">
+        <!--<h4>Seach for your friends</h1>-->
+        <!--<label for="search-text">Search for your friends</label>-->
+        <input type="text" id="search-friends" placeholder="search" class="search-box">
+
+        <!--<span class="input-group-btn">-->
+        <button class="btn btn-danger" type="button" id="searchBut">
+                <span class=" glyphicon glyphicon-search"></span>
+            </button>
+        <!--</span>-->
+      </div>
+    </div>
+
+    <div class="page-header text-left">
+      <h2>General Stats</h2>
+
+
+    </div>
+
+    <!--Section for table of statistics-->
+    <div class="row">
+      <div class="input-group col-md-12 text-left">
+        <a href="#" class="btn btn-primary">Generate Stats</a>
+
+        <table class="table table-striped table-hover" id="wordTable" style="width:50%">
+          <thead>
+            <tr>
+              <th colspan="2">Message statistics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Total words</th>
+              <th>1999</th>
+            </tr>
+
+            <tr>
+              <th>Total Messages</th>
+              <th>1999</th>
+            </tr>
+
+            <tr>
+              <th>Total Messages Sent</th>
+              <th>1999</th>
+            </tr>
+
+            <tr>
+              <th>Total Messages Recieved</th>
+              <th>1999</th>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 text-left" id="bar-mpy">
+        <a href="#" class="btn btn-primary">Generate Bar Graph</a>
+      </div>
+
+      <div class="col-md-6 text-left">
         <h1>A fab graph mate</h1>
       </div>
-      <a href="#" class="btn btn-primary">Generate Bar Graph</a>
-
-      <div class="col-md-6" id="bar-mpy">
-
-      </div>
-
     </div>
 
 
@@ -75,7 +147,19 @@
       <tbody>
       </tbody>
     </table>
+
+
   </div>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
