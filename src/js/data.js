@@ -256,6 +256,7 @@ function createWorkableDataStructure() {
     thread.innerHTML = threads[i].innerHTML;
 
     let peopleInThread = getPeopleInThread(thread);
+    console.log(peopleInThread);
     let users = thread.getElementsByClassName('user');
     let meta = thread.getElementsByClassName('meta');
     let messages = thread.getElementsByClassName('message');
