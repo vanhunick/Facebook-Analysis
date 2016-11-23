@@ -14,6 +14,9 @@ let threads;
 // The converted data structure
 let dataStruct;
 
+// Array of friends used for searching
+let friends = ["No Data"];
+
 // The load file bar element
 const loadFileElem = document.getElementById("loadFile");
 
@@ -54,7 +57,6 @@ function handleFileSelect(evt) {
     threads = dataElem.getElementsByClassName('thread');
 
     dataStruct = createWorkableDataStructure();
-    Console.log("Done : " + dataStruct.length);
   }
 
 
@@ -277,11 +279,18 @@ function createWorkableDataStructure() {
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
-    elemLoadData.textContent = 100 + '%';    
+    elemLoadData.textContent = 100 + '%'; 
+    
+    friends = listPeople(messageDataArray);
+    console.log(friends);   
     return messageDataArray;
   }
 
   
+}
+
+function getFriends(){
+  return friends;
 }
 
 function genBarGraph(){
@@ -302,6 +311,8 @@ function updateProgress(evt) {
     }
   }
 }
+
+
 
 
 function createStatisticsTable(){
