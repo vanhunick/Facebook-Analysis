@@ -59,5 +59,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+const randomData = [];
+
+for(let i = 0; i < 100; i++){
+	randomData.push(createRandomMessageData());
+}
+
+console.log(randomData);
 
 

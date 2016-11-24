@@ -12,16 +12,23 @@ let dataElem;
 let threads;
 
 // The converted data structure
-let dataStruct;
+var dataStruct;
 
 // Array of friends used for searching
-let friends = ["No Data"];
+var friends = ["No Data"];
 
 // The load file bar element
 const loadFileElem = document.getElementById("loadFile");
 
 // The load bar bar element
 const elemLoadData = document.getElementById("loadData");
+
+// Setup for default data
+// dataStruct = randomData;
+// console.log(dataStruct.length);
+// friends = listPeople(messageDataArray);
+// updateAutocomplete();
+// createPie(messageDataArray);
 
 function handleFileSelect(evt) {
   var files = evt.target.files; // FileList object
@@ -35,6 +42,8 @@ function handleFileSelect(evt) {
       f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
       '</li>');
   }
+
+
 
   var reader = new FileReader();
 
@@ -328,16 +337,16 @@ function updateProgress(evt) {
 function createStatisticsTable(){
   let totMessages = 0; totSent = 0; totRec = 0; totWords = 0;
 
-  for(let i = 0; i < messageDataArray.length; i++){
+  for(let i = 0; i < dataStruct.length; i++){
       totMessages++;
 
-      if(messageDataArray[i].sender.toLowerCase() === "nicky van hulst"){
+      if(dataStruct[i].sender.toLowerCase() === "nicky van hulst"){
         totSent++; //TODO update to use users name
       } else {
         totRec++;
       }
 
-      totWords+= messageDataArray[i].words.length; 
+      totWords+= dataStruct[i].words.length; 
   }
   console.log(totSent + " " + totRec + " " + totMessages + " " + totWords );
 
@@ -380,6 +389,7 @@ function friendSearched(friendString){
 
 
 function createPie(dataStruct){
+  
   let entry = {
       name: "",
       count: 0 
@@ -388,6 +398,7 @@ function createPie(dataStruct){
   let peopleMap = {};
 
     for (let i = 0; i < dataStruct.length; i++) {
+      
       if(dataStruct[i].sender.toLowerCase() !== user.toLowerCase()){ // Ignore user messages
         if(peopleMap[dataStruct[i].sender.toLowerCase()] === undefined){
           peopleMap[dataStruct[i].sender.toLowerCase()] = 0;
@@ -407,7 +418,12 @@ function createPie(dataStruct){
 
   peopleArray.sort(function (a, b) { return a.count - b.count });
 
-  showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));
+
+  if(peopleArray.length <= 10){
+    showPie(peopleArray);
+  } else {
+    showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));  
+  }
 }
 
 

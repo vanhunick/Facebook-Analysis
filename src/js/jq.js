@@ -27,6 +27,12 @@ $(document).ready(function(){
 
 });
 
+// Example data
+dataStruct = randomData;
+friends = listPeople(dataStruct);
+updateAutocomplete();
+createPie(dataStruct);
+
 });
 
 
