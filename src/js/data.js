@@ -211,8 +211,12 @@ function getPeopleInThread(thread) {
   }
 
   let str = thread.innerHTML.substr(0, index);
-  str = str.replace(/,/g, "");
-  return str.split(" ");
+  let people = str.split(",");
+  for(let i = 0; i < people.length; i++){
+    people[i] = people[i].replace(/,/g, ""); // Remove the comma from each person  
+  }
+  console.log(people);
+  return people;
 }
 
 
@@ -338,7 +342,7 @@ function createStatisticsTable(){
 }
 
 function friendSearched(friendString){
-  
+
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
