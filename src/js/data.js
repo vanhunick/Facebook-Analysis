@@ -282,7 +282,7 @@ function createWorkableDataStructure() {
     elemLoadData.textContent = 100 + '%'; 
     
     friends = listPeople(messageDataArray);
-    console.log(friends);   
+    updateAutocomplete();
     return messageDataArray;
   }
 

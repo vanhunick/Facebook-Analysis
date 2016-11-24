@@ -10,14 +10,19 @@ $(document).ready(function(){
 });
 
 
+//  lookup: getFriends(),
 
-
-  // setup autocomplete function pulling from currencies[] array
-  $('#search-friends').autocomplete({
+  // setup autocomplete function pulling from friends[] array
+  function updateAutocomplete(){
+$('#search-friends').autocomplete({
     lookup: getFriends(),
     onSelect: function (suggestion) {
         console.log("Doing Stuff");
+        console.log("friends " + getFriends());
       var thehtml = '<strong>Currency Name:</strong> ' + suggestion;
       $('#outputcontent').html(thehtml);
     }
   });
+  }
+  
+  updateAutocomplete();
