@@ -7,6 +7,23 @@ $(document).ready(function(){
         $('#ld').show();
     });
 
+    // Respond to search bar button being pressed
+     $("#searchBut").click(function(){
+         var val = $('#search-friends').val();
+        friendSearched(val);
+    }); 
+
+    // Respond to enter being pressed in search bar
+    $('#search-friends').keypress(function(event){
+
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+        var val = $('#search-friends').val();
+        friendSearched(val);
+	}
+
+});
+
 });
 
 

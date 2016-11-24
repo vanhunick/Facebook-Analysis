@@ -337,4 +337,8 @@ function createStatisticsTable(){
   $('#tw').html(totWords);
 }
 
+function friendSearched(friendString){
+  
+}
+
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
