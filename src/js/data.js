@@ -349,13 +349,14 @@ let user = "Nicky van Hulst"
 function friendSearched(friendString){
   console.log("friendString " + friendString);
   //wordTableF
-  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0;
+  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
 
   for(let i = 0; i < messageDataArray.length; i++){
     totMessages++;
 
       if(messageDataArray[i].peopleInThread.length === 2){ // Could change later to apply to any thread
         if(messageDataArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || messageDataArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()){
+          totMessagesPerson++;
             if(messageDataArray[i].sender.toLowerCase() === user.toLowerCase()){
                 totSent++;
             } else {
@@ -369,7 +370,7 @@ function friendSearched(friendString){
 
   $('#tmsF').html(totSent);
   $('#tmrF').html(totRec);
-  $('#tmF').html(totMessages);
+  $('#tmF').html(totMessagesPerson);
   $('#twF').html(totWords);
   $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
