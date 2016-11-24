@@ -2,6 +2,9 @@ $(document).ready(function(){
     $('#lf').hide();
     $('#ld').hide();
 
+    $("#wordTableF").hide();
+
+
     $('#files').click(function(){
         $('#lf').show();
         $('#ld').show();

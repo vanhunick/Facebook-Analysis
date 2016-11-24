@@ -213,9 +213,12 @@ function getPeopleInThread(thread) {
   let str = thread.innerHTML.substr(0, index);
   let people = str.split(",");
   for(let i = 0; i < people.length; i++){
-    people[i] = people[i].replace(/,/g, ""); // Remove the comma from each person  
+    people[i] = people[i].replace(/,/g, ""); // Remove the comma from each person
+    if(people[i].startsWith(" ")){
+      people[i] = people[i].replace(" ","");
+    }
+
   }
-  console.log(people);
   return people;
 }
 
@@ -341,7 +344,36 @@ function createStatisticsTable(){
   $('#tw').html(totWords);
 }
 
+let user = "Nicky van Hulst"
+
 function friendSearched(friendString){
+  console.log("friendString " + friendString);
+  //wordTableF
+  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0;
+
+  for(let i = 0; i < messageDataArray.length; i++){
+    totMessages++;
+
+      if(messageDataArray[i].peopleInThread.length === 2){ // Could change later to apply to any thread
+        if(messageDataArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || messageDataArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()){
+            if(messageDataArray[i].sender.toLowerCase() === user.toLowerCase()){
+                totSent++;
+            } else {
+                totRec++;    
+            }
+            totWords+= messageDataArray[i].words.length;
+        }
+    }
+  }
+  console.log(totSent + " " + totRec + " " + totMessages + " " + totWords );
+
+  $('#tmsF').html(totSent);
+  $('#tmrF').html(totRec);
+  $('#tmF').html(totMessages);
+  $('#twF').html(totWords);
+  $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
+  $('#statF').html("Statistics for you and " + friendString);
+  $("#wordTableF").show();
 
 }
 
