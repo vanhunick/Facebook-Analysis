@@ -280,9 +280,7 @@ function createWorkableDataStructure() {
       let tempMessageData = new messageData(user, peopleInThread, timeData, words);
       messageDataArray.push(tempMessageData);
     }
-    setTimeout(createWorkableDataStructure, 0);
     i++;
-  }
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
@@ -290,8 +288,13 @@ function createWorkableDataStructure() {
     
     friends = listPeople(messageDataArray);
     updateAutocomplete();
+    createPie(messageDataArray);
     return messageDataArray;
+  } else {
+    setTimeout(createWorkableDataStructure, 0);
   }
+  }
+
 
   
 }
@@ -347,8 +350,7 @@ function createStatisticsTable(){
 let user = "Nicky van Hulst"
 
 function friendSearched(friendString){
-  console.log("friendString " + friendString);
-  //wordTableF
+  
   let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
 
   for(let i = 0; i < messageDataArray.length; i++){
@@ -366,7 +368,6 @@ function friendSearched(friendString){
         }
     }
   }
-  console.log(totSent + " " + totRec + " " + totMessages + " " + totWords );
 
   $('#tmsF').html(totSent);
   $('#tmrF').html(totRec);
@@ -375,7 +376,39 @@ function friendSearched(friendString){
   $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
   $("#wordTableF").show();
-
 }
+
+
+function createPie(dataStruct){
+  let entry = {
+      name: "",
+      count: 0 
+    };
+
+  let peopleMap = {};
+
+    for (let i = 0; i < dataStruct.length; i++) {
+      if(dataStruct[i].sender.toLowerCase() !== user.toLowerCase()){ // Ignore user messages
+        if(peopleMap[dataStruct[i].sender.toLowerCase()] === undefined){
+          peopleMap[dataStruct[i].sender.toLowerCase()] = 0;
+        }
+        peopleMap[dataStruct[i].sender.toLowerCase()]++;
+  }
+  }
+
+  let peopleArray = [];
+
+    for (var key in peopleMap) {
+    let newEntry = Object.create(entry);
+    newEntry.name = key;
+    newEntry.count = peopleMap[key];
+    peopleArray.push(newEntry);
+  }
+
+  peopleArray.sort(function (a, b) { return a.count - b.count });
+
+  showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));
+}
+
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);

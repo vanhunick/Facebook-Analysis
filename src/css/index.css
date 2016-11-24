@@ -32,12 +32,12 @@ table {
 
 
 
-.axis path,
+/*.axis path,
 .axis line {
   fill: none;
   stroke: white;
   shape-rendering: crispEdges;
-}
+}*/
 
 .bar {
   fill: orange;
@@ -79,6 +79,17 @@ table {
   top: 100%;
   left: 0;
 }
+
+/*Pie*/
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
 
 /*Search box Styling*/
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -135,7 +146,7 @@ table {
   margin-top: 2%;
 }
 
-
+/*Autocomplete*/
 .autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
 .autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
 .autocomplete-selected { background: #f0f0f0; }
