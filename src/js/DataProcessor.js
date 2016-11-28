@@ -1,5 +1,6 @@
 function DataProcessor(messageArray, user) {
     this.messageArray = messageArray;
+    this.metaData = createMetaData();
 }
 
 // Function to return a unique array of people
@@ -76,6 +77,30 @@ DataProcessor.prototype.createMetaData = function () {
     return new MetaData(totMessages, totWords, totPeople, totSent, totRec);
 }
 
+// Returns a friend meta data object
+DataProcessor.prototype.createFriendMetaData = function(friendString){
+    let totMessagesPerson = 0;
+    let totSent = 0; 
+    let totRec = 0; 
+    let totWords = 0; 
+
+  for(let i = 0; i < this.messageArray.length; i++){
+
+      if(this.messageArray[i].peopleInThread.length === 2){ // Could change later to apply to any thread
+        if(this.messageArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || this.messageArrayy[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()){
+          totMessagesPerson++;
+            if(this.messageArray[i].sender.toLowerCase() === user.toLowerCase()){
+                totSent++;
+            } else {
+                totRec++;    
+            }
+            totWords+= messageDataArray[i].words.length;
+        }
+    }
+  }
+  return new FriendMetaData(totMessagesPerson,totSent,totRec,totWords);
+}
+
 // Object that stores general meta data about the messages in order to not have to recalulate it
 function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalRecieved) {
     this.totalMessages = totalMessages;
@@ -83,4 +108,12 @@ function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalReciev
     this.totalPeople = totalPeople;
     this.totalSent = totalSent;
     this.totalRecieved = totalRecieved;
+}
+
+// Object that stores general meta data about the messages in order to not have to recalulate it
+function FriendMetaData(totalMessages,totalSent,totalRecieved, totalWords){
+    this.totalMessages = totalMessages;
+    this.totalSent = totalSent;
+    this.totalRecieved = totalRecieved;
+    this.totalWords = totalWords;
 }
