@@ -1,4 +1,4 @@
-function DataProcessor(messageArray) {
+function DataProcessor(messageArray, user) {
     this.messageArray = messageArray;
 }
 
@@ -18,6 +18,7 @@ DataProcessor.prototype.listPeople = function () {
     }
     return names;
 };
+
 
 // Returns an array with entry objects that hold a word and the frequence it occours
 DataProcessor.prototype.createWordMap = function () {
@@ -49,4 +50,37 @@ DataProcessor.prototype.createWordMap = function () {
     }
     wordArray.sort(function (a, b) { return a.count - b.count });
     return wordMap;
+}
+
+
+// Returns a MetaData Object
+DataProcessor.prototype.createMetaData = function () {
+    let totMessages = 0;
+    let totWords = 0;
+    let totPeople = this.listPeople.length; //TODO CHeck if calls the right thing
+    let totSent = 0;
+    let totRec = 0;
+
+    for (let i = 0; i < this.messageArray.length; i++) {
+        totMessages++;
+
+        if (this.messageArray[i].sender.toLowerCase() === user) {
+            totSent++;
+        } else {
+            totRec++;
+        }
+
+        totWords += this.messageArray[i].words.length;
+    }
+
+    return new MetaData(totMessages, totWords, totPeople, totSent, totRec);
+}
+
+// Object that stores general meta data about the messages in order to not have to recalulate it
+function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalRecieved) {
+    this.totalMessages = totalMessages;
+    this.totalWords = totalWords;
+    this.totalPeople = totalPeople;
+    this.totalSent = totalSent;
+    this.totalRecieved = totalRecieved;
 }
