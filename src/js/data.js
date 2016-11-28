@@ -112,6 +112,7 @@ function createWordMap(dataElem) {
     wordArray.push(newEntry);
   }
   wordArray.sort(function (a, b) { return a.count - b.count });
+  return wordMap;
 }
 
 
