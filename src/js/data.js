@@ -313,7 +313,7 @@ function getFriends(){
 }
 
 function genBarGraph(){
-  showYearBarGraph(createYearCountMap(messageDataArray));
+  showYearBarGraph(createYearCountMap(dataStruct));
 }
 
 

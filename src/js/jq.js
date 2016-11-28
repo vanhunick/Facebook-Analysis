@@ -32,6 +32,8 @@ dataStruct = randomData;
 friends = listPeople(dataStruct);
 updateAutocomplete();
 createPie(dataStruct);
+createStatisticsTable();
+genBarGraph()
 
 });
 
@@ -43,10 +45,10 @@ createPie(dataStruct);
 $('#search-friends').autocomplete({
     lookup: getFriends(),
     onSelect: function (suggestion) {
-        console.log("Doing Stuff");
-        console.log("friends " + getFriends());
-      var thehtml = '<strong>Currency Name:</strong> ' + suggestion;
-      $('#outputcontent').html(thehtml);
+    
+    var thehtml = 'Selected friend : <span style="color: orangered;">' + suggestion.value;
+      
+      $('#search-output').html(thehtml);
     }
   });
   }
