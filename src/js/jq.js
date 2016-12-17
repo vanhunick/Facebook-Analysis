@@ -28,7 +28,9 @@ $(document).ready(function(){
 });
 
 // Example data
-dataStruct = randomData;
+let dg = new DataGen();
+
+dataStruct = dg.getMessageArray(100);
 friends = listPeople(dataStruct);
 updateAutocomplete();
 createPie(dataStruct);
