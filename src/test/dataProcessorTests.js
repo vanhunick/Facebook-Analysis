@@ -1,14 +1,15 @@
 var assert = chai.assert;
 
 
-describe('Array', function() {
-  it('should return nothing ', function() {
+// Testing the DataProcessor get people function returns nothing with empty array
+describe('No Messages', function() {
+  it('Should return nothing ', function() {
 
-    let messageArray = dataGen.get  
+    
+    let ma = [];
+    let dp = new DataProcessor(ma,"Nicky van Hulst");
+    let res = dp.listPeople();
 
-    let dp = new DataProcessor();
-
-
-    assert.equal(arr.length, 0);
+    assert.equal(res.length, 0);
   });
 });

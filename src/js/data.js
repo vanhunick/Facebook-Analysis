@@ -258,7 +258,10 @@ let messageDataArray = [];
 
 // Conerts the html structure into a workable data structure
 function createWorkableDataStructure() {
-  
+
+    processThread();
+
+  function processThread(){
 
   if (i < threads.length) {//threads.length
     let percentDone = Math.floor((i / threads.length) * 100);
@@ -301,11 +304,11 @@ function createWorkableDataStructure() {
     createPie(messageDataArray);
     return messageDataArray;
   } else {
-    setTimeout(createWorkableDataStructure, 0);
+    setTimeout(processThread, 0);
   }
   }
 
-
+}
   
 }
 
@@ -428,4 +431,4 @@ function createPie(dataStruct){
 }
 
 
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+// document.getElementById('files').addEventListener('change', handleFileSelect, false);
