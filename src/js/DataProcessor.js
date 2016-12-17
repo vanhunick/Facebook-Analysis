@@ -74,7 +74,6 @@ DataProcessor.prototype.createMetaData = function () {
 
         totWords += this.messageArray[i].words.length;
     }
-
     return new MetaData(totMessages, totWords, totPeople, totSent, totRec);
 }
 

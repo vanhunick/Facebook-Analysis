@@ -5,7 +5,6 @@ var assert = chai.assert;
 describe('No Messages', function() {
   it('Should return nothing ', function() {
 
-    
     let ma = [];
     let dp = new DataProcessor(ma,"Nicky van Hulst");
     let res = dp.listPeople();
@@ -13,3 +12,4 @@ describe('No Messages', function() {
     assert.equal(res.length, 0);
   });
 });
+
