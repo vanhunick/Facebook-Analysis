@@ -39,7 +39,7 @@ DataProcessor.prototype.createWordMap = function () {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
-            let word = words[i];
+            let word = words[j];
             if (wordMap[word] === undefined) {
                 wordMap[word] = 0;
             }
@@ -56,6 +56,20 @@ DataProcessor.prototype.createWordMap = function () {
     }
     wordArray.sort(function (a, b) { return a.count - b.count });
     return wordMap;
+}
+
+DataProcessor.prototype.getUniqueWords = function () {
+    uw = [];
+
+        for (let i = 0; i < this.messageArray.length; i++) {
+        let words = this.messageArray[i].words;
+
+        for (let j = 0; j < words.length; j++) {
+            if(uw.indexOf(words[j] == -1)){
+                uw.push(words[j]);
+            }
+        }
+    }
 }
 
 // Creates a map where word is the key and value is the count
@@ -132,6 +146,7 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     }
     return new FriendMetaData(totMessagesPerson, totSent, totRec, totWords);
 }
+
 
 // Object that stores general meta data about the messages in order to not have to recalulate it
 function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalRecieved) {
