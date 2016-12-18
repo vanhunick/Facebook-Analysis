@@ -7,6 +7,9 @@ var DPUser;
 // Array of friends for autocomplete searching
 var friends = ["No data"];
 
+// Array of words for autocomplete searching
+var words = ["No data"];
+
 // Called when the upload file button is pressed
 function handleFileSelect(evt) {
     handleFileSelect1(evt, loadedData); //TODO change to loadFile
@@ -43,6 +46,7 @@ var DPRandom = new DataProcessor(dataGenerator.getMessageArray(100));
 function displayRandomData(){
     
     friends = DPRandom.listPeople(DPRandom.getMessageArray());
+    words = DPRandom.getWords();
     updateAutocomplete();
     createPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.getMessageArray());
@@ -58,10 +62,24 @@ function friendSearched(val){
     }
 }
 
+function wordSearched(val){
+    if(loaded){
+        showFriendStats(val,DPUser);
+    } else {
+        showWordStats(val,DPRandom);
+    }
+}
+
 // The loaded friends
 function getFriends(){
   return friends;
 }
+
+// The loaded friends
+function getWords(){
+  return wordsfriends;
+}
+
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
