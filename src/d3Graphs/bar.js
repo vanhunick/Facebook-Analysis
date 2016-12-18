@@ -27,6 +27,7 @@ var tip = d3.tip()
   })
 
 function showYearBarGraph(dataInput){
+
 var svg = d3.select("#bar-mpy").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)

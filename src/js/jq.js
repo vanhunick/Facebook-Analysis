@@ -27,20 +27,11 @@ $(document).ready(function(){
 
 });
 
-// Example data
-let dg = new DataGen();
-
-dataStruct = dg.getMessageArray(100);
-friends = listPeople(dataStruct);
-updateAutocomplete();
-createPie(dataStruct);
-createStatisticsTable();
-genBarGraph()
+    displayRandomData(); 
 
 });
 
 
-//  lookup: getFriends(),
 
   // setup autocomplete function pulling from friends[] array
   function updateAutocomplete(){

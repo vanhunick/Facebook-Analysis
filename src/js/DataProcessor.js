@@ -4,6 +4,10 @@ function DataProcessor(messageArray, user) {
     
 }
 
+DataProcessor.prototype.getMessageArray = function() {
+    return this.messageArray;
+}
+
 // Function to return a unique array of people
 DataProcessor.prototype.listPeople = function () {
     let peopleSet = {};
@@ -54,12 +58,39 @@ DataProcessor.prototype.createWordMap = function () {
     return wordMap;
 }
 
+// Creates a map where word is the key and value is the count
+
+DataProcessor.prototype.createYearCountMap = function (){
+    let entry = {
+    letter: "",
+    frequency: 0
+  };
+
+  let yearMap = {};
+  
+  for (let i = 0; i <this.messageArray.length; i++) {
+    if(yearMap[this.messageArray[i].timeData.year] === undefined){
+      yearMap[this.messageArray[i].timeData.year] = 0;
+    }
+    yearMap[this.messageArray[i].timeData.year]++;
+  }
+
+  let wordArray = [];
+  for (var key in yearMap) {
+    let newEntry = Object.create(entry);
+    newEntry.letter = key;
+    newEntry.frequency = yearMap[key];
+    wordArray.push(newEntry);
+  }
+  return wordArray;
+}
+
 
 // Returns a MetaData Object
 DataProcessor.prototype.createMetaData = function () {
     let totMessages = 0;
     let totWords = 0;
-    let totPeople = this.listPeople.length; //TODO CHeck if calls the right thing
+    let totPeople = this.listPeople().length; //TODO CHeck if calls the right thing
     let totSent = 0;
     let totRec = 0;
 
