@@ -83,7 +83,7 @@ function genBarGraph(proc){
   showYearBarGraph(proc.createYearCountMap());
 }
 
-
+// TODO 
 function showFriendStats(friendString, messageDataArray){
 
   
@@ -114,4 +114,8 @@ function showFriendStats(friendString, messageDataArray){
   $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
   $("#wordTableF").show();
+}
+
+function showWordStats(val,dataProcessor){
+
 }

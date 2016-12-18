@@ -25,7 +25,20 @@ $(document).ready(function(){
         friendSearched(val);
 	}
 
-});
+    });
+
+    
+
+    // Respond to enter being pressed in search bar for words
+    $('#search-words').keypress(function(event){
+
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+        var val = $('#search-words').val();
+        wordSearched(val);
+	}
+
+    });
 
     displayRandomData(); 
 
@@ -46,4 +59,15 @@ $('#search-friends').autocomplete({
   });
   }
   
+$('#search-words').autocomplete({
+    lookup: getWords(),
+    onSelect: function (suggestion) {
+    
+    var thehtml = 'Selected Word : <span style="color: orangered;">' + suggestion.value;
+      
+      $('#search-output-word').html(thehtml);
+    }
+  });
+
+
   updateAutocomplete();
