@@ -1,7 +1,6 @@
 function DataProcessor(messageArray, user) {
     this.messageArray = messageArray;
-    // this.metaData = createMetaData
-    
+    this.user = user;
 }
 
 DataProcessor.prototype.getMessageArray = function() {
@@ -70,6 +69,7 @@ DataProcessor.prototype.getUniqueWords = function () {
             }
         }
     }
+    return uw;
 }
 
 // Creates a map where word is the key and value is the count
