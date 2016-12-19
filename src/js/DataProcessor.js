@@ -73,7 +73,6 @@ DataProcessor.prototype.getUniqueWords = function () {
 }
 
 // Creates a map where word is the key and value is the count
-
 DataProcessor.prototype.createYearCountMap = function (){
     let entry = {
     letter: "",
@@ -97,6 +96,72 @@ DataProcessor.prototype.createYearCountMap = function (){
     wordArray.push(newEntry);
   }
   return wordArray;
+}
+
+DataProcessor.prototype.wordUssageOverTime = function(word) {
+    
+    // First filter out all the messages that contain the word we care about
+    let relMessages = this.messageArray.filter(message => message.words.indexOf(word) !=-1);
+
+    // Map with date 'year month' as the key and the count of the occours of 'word' as the value
+    let dateMap = {};
+
+    // Go through all relevant messages
+    for(let i = 0; i < relMessages.length; i++){
+
+        // Create an array of the words that match word in the message this will be at least one match
+        let wordMatch = relMessages[i].words.filter(aWord => aWord === word);
+
+        // Create a string out of the year and the month to use as a key in the map
+        let date = relMessages[i].timeData.year + " " + relMessages[i].timeData.month;
+
+            if(dateMap[date] === undefined){
+              dateMap[date] = 0;
+            }
+            dateMap[date] += wordMatch.length;
+    } 
+
+    let entry = {
+        date : "",
+        count : 0
+    }
+
+    let entryArray = [];
+
+    for (var key in dateMap) {
+        let newEntry = Object.create(entry);
+        newEntry.date = key;
+        newEntry.count = dateMap[key];
+        entryArray.push(newEntry);
+  }
+
+    return entryArray;
+}
+
+// Function that returns the number of occourences of a word in a message
+DataProcessor.prototype.wordInMessageCount = function (message, word) {
+    let count = 0;
+    for(let i = 0; i < message.length; i++) {
+        if(message[i] === word){
+            count++;
+        }
+    }
+    return count;
+}
+
+
+// Returns an array containing all the years messages were sent
+DataProcessor.prototype.getYears = function () {
+    let yearArray = [];
+      let yearMap = {};
+  
+  for (let i = 0; i <this.messageArray.length; i++) {
+    if(yearMap[this.messageArray[i].timeData.year] === undefined){
+      yearMap[this.messageArray[i].timeData.year] = 0;
+      yearArray.push(this.messageArray[i].timeData.year);
+    }
+  }
+  return yearArray;
 }
 
 
@@ -146,6 +211,10 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     }
     return new FriendMetaData(totMessagesPerson, totSent, totRec, totWords);
 }
+
+
+
+
 
 
 // Object that stores general meta data about the messages in order to not have to recalulate it
