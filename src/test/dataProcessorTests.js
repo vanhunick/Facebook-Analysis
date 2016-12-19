@@ -13,3 +13,15 @@ describe('No Messages', function() {
   });
 });
 
+// Testing the get unique words function
+describe('Should contain at least one word', function() {
+  it('Should contain at least one word', function() {
+
+    let DPRandom = new DataProcessor(new DataGen().getMessageArray(100),'nicky van hulst');
+    let words = DPRandom.getUniqueWords();
+    
+
+    assert(words.length != 0, "Should not be empty");
+    console.log(words);
+  });
+});

@@ -59,6 +59,7 @@ $('#search-friends').autocomplete({
   });
   }
   
+  function updateWordAutocomplete(){
 $('#search-words').autocomplete({
     lookup: getWords(),
     onSelect: function (suggestion) {
@@ -68,6 +69,7 @@ $('#search-words').autocomplete({
       $('#search-output-word').html(thehtml);
     }
   });
+  }
 
-
-  updateAutocomplete();
+updateWordAutocomplete();
+updateAutocomplete();
