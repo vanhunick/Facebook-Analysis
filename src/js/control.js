@@ -46,8 +46,11 @@ var DPRandom = new DataProcessor(dataGenerator.getMessageArray(100));
 function displayRandomData(){
     
     friends = DPRandom.listPeople(DPRandom.getMessageArray());
-    words = DPRandom.getWords();
+    words = DPRandom.getUniqueWords();
+    
     updateAutocomplete();
+    updateWordAutocomplete();
+    
     createPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.getMessageArray());
     genBarGraph(DPRandom);
@@ -64,7 +67,7 @@ function friendSearched(val){
 
 function wordSearched(val){
     if(loaded){
-        showFriendStats(val,DPUser);
+        showWordstats(val,DPUser);
     } else {
         showWordStats(val,DPRandom);
     }
@@ -77,7 +80,7 @@ function getFriends(){
 
 // The loaded friends
 function getWords(){
-  return wordsfriends;
+  return words;
 }
 
 
