@@ -1,5 +1,5 @@
-// Some random words
-const words = ["moldavia", "eclipsing", "minotaur", "lido", "halloween", "semite", "cylvia", "tatiana",
+// Some random someWords
+const someWords = ["moldavia", "eclipsing", "minotaur", "lido", "halloween", "semite", "cylvia", "tatiana",
 	"degrease", "ectype", "elena", "picara", "dividedly", "pottier", "yawata", "macu", "muggur", "forsythia",
 	"bakeries", "memphian", "fubsiest", "pygmalion", "sotted", "yap", "dulcinea", "revelry", "cwo", "bluey",
 	"rifler", "delilah", "madrona", "mulliken", "bulldoze", "eddie", "cheney", "dysuria", "analogy", "annwn",
@@ -25,7 +25,7 @@ var DataGen = function(){};
 DataGen.prototype.createRandomMessage = function () {
 	let message = [];
 	for (let i = 0; i < getRandomInt(0, 10); i++) { // Create a random length message
-		message.push(words[getRandomInt(0, words.length)]); // Grab a random word out of the words array
+		message.push(someWords[getRandomInt(0, someWords.length)]); // Grab a random word out of the someWords array
 	}
 	return message;
 }
