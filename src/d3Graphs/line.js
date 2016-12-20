@@ -1,50 +1,58 @@
-var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+function showLineGraph(input) {
+    var margin = { top: 40, right: 20, bottom: 80, left: 50 },
+        width = 800 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
 
-// var parseTime = d3.timeParse("%d-%b-%y");
-var parseTime = d3.timeParse("%y %b"); // year month
+    var svg = d3.select("#word-time").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
 
-var x = d3.scaleTime()
-    .rangeRound([0, width]);
+    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var y = d3.scaleLinear()
-    .rangeRound([height, 0]);
+    var parseTime = d3.timeParse("%Y %B"); // year month
 
-var line = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.close); });
+    data = input;
 
-d3.tsv("data.tsv", function(d) {
-  d.date = parseTime(d.date);
-  d.close = +d.close;
-  return d;
-}, function(error, data) {
-  if (error) throw error;
+    // Convert data into correct types
+    for (let i = 0; i < data.length; i++) {
+        data[i].count = +data[i].count;
+        data[i].date = parseTime(data[i].date);
+    }
 
-  x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain(d3.extent(data, function(d) { return d.close; }));
+    // now sort them as they are date objects
+    data.sort((a, b) => a.date - b.date);
 
-  g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+    var x = d3.scaleTime()
+        .rangeRound([0, width]);
 
-  g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y))
-    .append("text")
-      .attr("fill", "#000")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .style("text-anchor", "end")
-      .text("Price ($)");
+    var y = d3.scaleLinear()
+        .rangeRound([height, 0]);
 
-  g.append("path")
-      .datum(data)
-      .attr("class", "line")
-      .attr("d", line);
-});
+    var line = d3.line()
+        .x(function (d) { return x(d.date); })
+        .y(function (d) { return y(d.count); });
+
+    x.domain(d3.extent(data, function (d) { return d.date; }));
+    y.domain(d3.extent(data, function (d) { return d.count; }));
+
+    g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    g.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .style("text-anchor", "end")
+        .text("Frequency");
+
+    g.append("path")
+        .datum(data)
+        .attr("class", "line")
+        .attr("d", line);
+}
