@@ -1,5 +1,4 @@
 function showPie(dataSource) {
-    
     var width = 350,
         height = 350,
         radius = Math.min(width, height) / 2;
@@ -49,10 +48,10 @@ function showPie(dataSource) {
         .attr("dy", ".35em")
         .text(function (d) { return d.data.name; });
 
-        function type(d) {
-    d.count = +d.count;
-    return d;
-}
+    function type(d) {
+        d.count = +d.count;
+        return d;
+    }
 }
 
 
