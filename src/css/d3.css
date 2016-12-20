@@ -13,10 +13,6 @@
   fill: orangered ;
 }
 
-/*.x.axis path {
-  display: none;
-}*/
-
 .d3-tip {
   line-height: 1;
   font-weight: bold;
@@ -54,4 +50,11 @@
 
 .arc path {
   stroke: #fff;
+}
+
+/*Line graph*/
+.line {
+  fill: none;
+  stroke: orangered;
+  stroke-width: 3px;
 }
