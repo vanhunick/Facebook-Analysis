@@ -84,8 +84,8 @@ function genBarGraph(proc){
 }
 
 // TODO 
-function showFriendStats(friendString, messageDataArray){
-
+function showFriendStats(friendString, dataProcessor){
+  let messageDataArray = dataProcessor.getMessageArray();
   
   let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
 
@@ -114,10 +114,14 @@ function showFriendStats(friendString, messageDataArray){
   $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
   $("#wordTableF").show();
+
+
+  // Show the line graph 
+  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line");
 }
 
 function showWordStats(val,dataProcessor){
   // Create some other stat table
 
-  showLineGraph(dataProcessor.wordUssageOverTime(val));
+  showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time");
 }

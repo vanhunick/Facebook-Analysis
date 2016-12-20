@@ -139,6 +139,70 @@ DataProcessor.prototype.wordUssageOverTime = function(word) {
     return entryArray;
 }
 
+
+DataProcessor.prototype.friendMessagesOverTime = function(friendName) {
+    let relMessages = this.messageArray.filter(message => message.sender === friendName);
+    
+    let dateMap = {}
+
+    for(let i = 0; i < relMessages.length; i++){
+        
+        // Create a string out of the year and the month to use as a key in the map
+        let date = relMessages[i].timeData.year + " " + relMessages[i].timeData.month;
+
+            if(dateMap[date] === undefined){
+              dateMap[date] = 0;
+            }
+            dateMap[date] ++;
+    }
+
+    let entry = {
+        date : "",
+        count : 0
+    }
+
+    let entryArray = [];
+
+    for (var key in dateMap) {
+        let newEntry = Object.create(entry);
+        newEntry.date = key;
+        newEntry.count = dateMap[key];
+        entryArray.push(newEntry);
+  }
+    return entryArray;
+}
+
+
+// Returns an array of entries where with a date and count for the number of messages sent on that date
+DataProcessor.prototype.totalMessagesOverTime = function () {
+    let dateMap = {};
+
+    for(let i = 0; i < this.messageArray.length; i++){
+        // Create a string out of the year and the month to use as a key in the map
+        let date = this.messageArray[i].timeData.year + " " + this.messageArray[i].timeData.month;
+
+            if(dateMap[date] === undefined){
+              dateMap[date] = 0;
+            }
+            dateMap[date] ++;
+    }
+
+    let entry = {
+        date : "",
+        count : 0
+    }
+
+    let entryArray = [];
+
+    for (var key in dateMap) {
+        let newEntry = Object.create(entry);
+        newEntry.date = key;
+        newEntry.count = dateMap[key];
+        entryArray.push(newEntry);
+  }
+    return entryArray;
+}
+
 // Function that returns the number of occourences of a word in a message
 DataProcessor.prototype.wordInMessageCount = function (message, word) {
     let count = 0;

@@ -27,6 +27,8 @@ function loadedData(data){
     updateWordAutocomplete();
     
     // d3.select("svg").selectAll("*").remove();
+    showLineGraph(DPUser.totalMessagesOverTime(),"stat-line");
+
 
     //draw the pie 
     createPie(data);
@@ -56,6 +58,9 @@ function displayRandomData(){
     createStatisticsTable(DPRandom.getMessageArray());
     genBarGraph(DPRandom);
 
+    showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line");
+
+
     friendSearched(friends[0]);
     wordSearched(words[0]);
       
@@ -69,9 +74,9 @@ function displayRandomData(){
 
 function friendSearched(val){
     if(loaded){
-        showFriendStats(val,DPUser.getMessageArray());
+        showFriendStats(val,DPUser);
     } else {
-        showFriendStats(val,DPRandom.getMessageArray());
+        showFriendStats(val,DPRandom);
     }
 }
 

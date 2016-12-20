@@ -33,106 +33,109 @@
     <div class="row">
       <div class="col-md-6 text-left">
         <div class="well" id="data-instructions">
-          <h2><span style="Color:orangered;"><b>Step 1:</b></span> Getting your data</h2>
+          <h2>
+            <span style="Color:orangered;"><b>Step 1:</b></span> Getting your data</h2>
 
-          <ol type="1">
-            <li>Click down arrow on Facebook homepage top right corner</li>
-            <li>Select Settings</li>
-            <li>Click download and follow prompts</li>
-          </ol>
+<ol type="1">
+  <li>Click down arrow on Facebook homepage top right corner</li>
+  <li>Select Settings</li>
+  <li>Click download and follow prompts</li>
+</ol>
 
-          <h4>Or see</h4>
-          <a href="https://www.facebook.com/help/212802592074644?helpref=uf_permalink" target="_blank">Facebook instructions</a>
-        </div>
-      </div>
+<h4>Or see</h4>
+<a href="https://www.facebook.com/help/212802592074644?helpref=uf_permalink" target="_blank">Facebook instructions</a>
+</div>
+</div>
 
-      <div class="col-md-6 text-left">
-        <div class="well" id="data-instructions">
-          <h2><span style="Color:orangered;"><b>Step 2:</b></span> finding and selecting message file</h2>
+<div class="col-md-6 text-left">
+  <div class="well" id="data-instructions">
+    <h2>
+      <span style="Color:orangered;"><b>Step 2:</b></span> finding and selecting message file</h2>
 
-          <ol type="1">
-            <li>Extract Data</li>
-            <li>Click the load file button</li>
-            <li>Find file names "messages" and press okay</li>
-            <li>Done!</li>
-          </ol>
+<ol type="1">
+  <li>Extract Data</li>
+  <li>Click the load file button</li>
+  <li>Find file names "messages" and press okay</li>
+  <li>Done!</li>
+</ol>
 
-        </div>
-      </div>
-    </div>
+</div>
+</div>
+</div>
 
-    <div class="row">
+<div class="row">
 
-      <h4>Showing random data select your file to generate custom statistics</h4>
-        <div class="col-md-12 text-center">
-            <!--Upload File button-->
-        <label class="btn btn-primary" id="up" style="text-align:center">Select File&hellip;
-        <input type="file" id="files" name="files[]" multiple style="display: none;" />
-    </label>  
-        </div>
-      
-    </div>
+  <h4>Showing random data select your file to generate custom statistics</h4>
+  <div class="col-md-12 text-center">
+    <!--Upload File button-->
+    <label class="btn btn-primary" id="up" style="text-align:center">Select File&hellip;
+<input type="file" id="files" name="files[]" multiple style="display: none;" />
+</label>
+</div>
 
-    <div class="row">
-      <!--<div class="col-md-2 text-left">-->
-        <!--Upload File button-->
-        <!--<label class="btn btn-primary" style="text-align:left">Select File&hellip;
+</div>
+
+<div class="row">
+  <!--<div class="col-md-2 text-left">-->
+  <!--Upload File button-->
+  <!--<label class="btn btn-primary" style="text-align:left">Select File&hellip;
         <input type="file" id="files" name="files[]" multiple style="display: none;" />
     </label>
       </div>-->
-      <!--<div class="col-md-10 text-left">-->
-        <!--File loading bar-->
+  <!--<div class="col-md-10 text-left">-->
+  <!--File loading bar-->
 
-      <!--</div>-->
+  <!--</div>-->
+</div>
+
+
+
+<!--Row for loading bars-->
+<div class="row">
+  <div class="col-md-6">
+    <!--File loading bar-->
+    <div class="progress" id="lf">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+        style="width:0%" id="loadFile"></div>
+</div>
+</div>
+<div class="col-md-6">
+
+  <!--Data Structure loading bar-->
+  <div class="progress" id="ld">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+      style="width:0%" id="loadData"></div>
+</div>
+
+</div>
+</div>
+
+<div class="page-header text-left">
+  <h2 class="header">General Stats</h2>
+</div>
+
+<!--Row for bar graph showing messages per year and pie-->
+<div class="well">
+  <div class="row">
+    <div class="col-md-6 text-center" id="bar-mpy">
+      <h3>Graph showing messages per year</h3>
     </div>
-
-
-
-    <!--Row for loading bars-->
-    <div class="row">
-      <div class="col-md-6">
-        <!--File loading bar-->
-        <div class="progress" id="lf">
-          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-            style="width:0%" id="loadFile"></div>
-        </div>
-      </div>
-      <div class="col-md-6">
-
-        <!--Data Structure loading bar-->
-        <div class="progress" id="ld">
-          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-            style="width:0%" id="loadData"></div>
-        </div>
-
-      </div>
+    <div class="col-md-6 text-center" id="pie">
+      <h3>Interaction Pie</h3>
     </div>
+  </div>
+</div>
 
-    <div class="page-header text-left">
-      <h2 class="header">General Stats</h2>
-    </div>
+<!--Section for table of statistics-->
+<div class="row">
+  <div class="col-md-6 text-left">
+    <!--<button class="btn btn-primary" onclick="createStatisticsTable()">Generate Stats</button>-->
 
-    <!--Row for bar graph showing messages per year and pie-->
-    <div class="well">
-    <div class="row">
-      <div class="col-md-6 text-center" id="bar-mpy">
-        <h3>Graph showing messages per year</h3>
-      </div>
-      <div class="col-md-6 text-center" id="pie">
-        <h3>Interaction Pie</h3>
-      </div>
-    </div>
-    </div>
-
-    <!--Section for table of statistics-->
-    <div class="row">
-      <div class="col-md-6 text-left">
-        <!--<button class="btn btn-primary" onclick="createStatisticsTable()">Generate Stats</button>-->
-
-        <table class="table table-striped table-hover" id="wordTable" style="width:100%">
-          <thead>
-            <tr>
-              <th colspan="2"><h4><b>Message statistics<b><h4></th>
+    <table class="table table-striped table-hover" id="wordTable" style="width:100%">
+<thead>
+  <tr>
+    <th colspan="2">
+      <h4><b>Message statistics<b><h4></th>
             </tr>
           </thead>
           <tbody>
@@ -163,6 +166,12 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-12 text-left" id="stat-line">
+        <h4>Total messages over time</h4>
+      </div>
+    </div>
+
     <div class="page-header text-left">
       <h2 class="header">Friend Stats</h2>
     </div>
@@ -172,85 +181,99 @@
     <div class="row">
       <div class="input-group col-md-12 text-left">
         <h4 id="search-heading">Seach for your friends</h4>
-        <h6 id="search-output">Selected friend : <span style="  color: orangered;">None</span></h6>
-        <!--<label for="search-text">Search for your friends</label>-->
-        <input type="text" id="search-friends" placeholder="search" class="search-box">
-        <button class="btn btn-danger" type="button" id="searchBut">
+        <h6 id="search-output">Selected friend : <span style="  color: orangered;">None</span>
+</h6>
+<!--<label for="search-text">Search for your friends</label>-->
+<input type="text" id="search-friends" placeholder="search" class="search-box">
+<button class="btn btn-danger" type="button" id="searchBut">
                 <span class=" glyphicon glyphicon-search"></span>
             </button>
-        <!--Search output-->
-        <div id="outputbox"></div>
-      </div>
-    </div>
+<!--Search output-->
+<div id="outputbox"></div>
+</div>
+</div>
 
-    <!--Section for table of statistics-->
-    <div class="row">
-      <div class="col-md-12 text-left">
-        <table class="table table-striped table-hover" id="wordTableF" style="width:50%">
-          <thead>
-            <tr>
-              <th colspan="2" id="statF">Message statistics friends</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Total words</th>
-              <th id="twF">0</th>
-            </tr>
+<!--Section for table of statistics-->
+<div class="row">
+  <div class="col-md-12 text-left">
+    <table class="table table-striped table-hover" id="wordTableF" style="width:50%">
+<thead>
+  <tr>
+    <th colspan="2" id="statF">Message statistics friends</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <th>Total words</th>
+    <th id="twF">0</th>
+  </tr>
 
-            <tr>
-              <th>Total Messages</th>
-              <th id="tmF">0</th>
-            </tr>
+  <tr>
+    <th>Total Messages</th>
+    <th id="tmF">0</th>
+  </tr>
 
-            <tr>
-              <th>Total Messages Sent</th>
-              <th id="tmsF">0</th>
-            </tr>
+  <tr>
+    <th>Total Messages Sent</th>
+    <th id="tmsF">0</th>
+  </tr>
 
-            <tr>
-              <th>Total Messages Recieved</th>
-              <th id="tmrF">0</th>
-            </tr>
-            <tr>
-              <th>Total message %</th>
-              <th id="pms">0</th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  <tr>
+    <th>Total Messages Recieved</th>
+    <th id="tmrF">0</th>
+  </tr>
+  <tr>
+    <th>Total message %</th>
+    <th id="pms">0</th>
+  </tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
-    <div class="page-header text-left">
-      <h2 class="header">Language Stats</h2>
-    </div>
 
-        <!--Row for search bar-->
-    <div class="row">
-      <div class="input-group col-md-12 text-left">
-        <h4 id="search-heading">Seach for a word</h4>
-        <h6 id="search-output-word">Selected word : <span style="  color: orangered;">None</span></h6>
-        <!--<label for="search-text">Search for your friends</label>-->
-        <input type="text" id="search-words" placeholder="search" class="search-box">
-        <button class="btn btn-danger" type="button" id="searchButLang">
+<div class="row">
+  <div class="col-md-12 text-left" id="friend-line">
+    <h4>Messages over time to friend</h4>
+    <div class="adjust"><input type="checkbox" name="vehicle" value="Bike"> Adjust for messages sent<br></div>
+
+
+  </div>
+</div>
+
+
+<div class="page-header text-left">
+  <h2 class="header">Language Stats</h2>
+</div>
+
+<!--Row for search bar-->
+<div class="row">
+  <div class="input-group col-md-12 text-left">
+    <h4 id="search-heading">Seach for a word</h4>
+    <h6 id="search-output-word">Selected word :
+      <span style="  color: orangered;">None</span>
+</h6>
+<!--<label for="search-text">Search for your friends</label>-->
+<input type="text" id="search-words" placeholder="search" class="search-box">
+<button class="btn btn-danger" type="button" id="searchButLang">
                 <span class=" glyphicon glyphicon-search"></span>
             </button>
-        <!--Search output-->
-        <div id="outputboxLang"></div>
-      </div>
-    </div>
+<!--Search output-->
+<div id="outputboxLang"></div>
+</div>
+</div>
 
 
-    <!--Row for line graph showing word and occourence over time-->
-    <div class="row">
+<!--Row for line graph showing word and occourence over time-->
+<div class="row">
 
-      <div class="col-md-12 text-left" id="word-time">
+  <div class="col-md-12 text-left" id="word-time">
 
-      </div>
-    </div>
+  </div>
+</div>
 
-    <!--Table for word count  
+<!--Table for word count  
     <table class="table table-striped table-hover" id="wordTable">
       <thead>
         <tr>
@@ -261,7 +284,7 @@
       <tbody>
       </tbody>
     </table>-->
-  </div>
+</div>
 </body>
 
 </html>

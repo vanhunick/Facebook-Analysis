@@ -1,9 +1,9 @@
-function showLineGraph(input) {
+function showLineGraph(input, divId) {
     var margin = { top: 40, right: 20, bottom: 80, left: 50 },
         width = 800 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
-    var svg = d3.select("#word-time").append("svg")
+    var svg = d3.select("#"+divId).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
 
