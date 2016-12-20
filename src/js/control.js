@@ -20,10 +20,11 @@ function loadedData(data){
     loaded = true;
     DPUser = new DataProcessor(data);
     friends = DPUser.listPeople();
+    words = DPUser.getUniqueWords();
 
     // Add friends to the autocomplete
     updateAutocomplete();
-
+    updateWordAutocomplete();
     
     // d3.select("svg").selectAll("*").remove();
 
@@ -76,7 +77,7 @@ function friendSearched(val){
 
 function wordSearched(val){
     if(loaded){
-        showWordstats(val,DPUser);
+        showWordStats(val,DPUser);
     } else {
         showWordStats(val,DPRandom);
     }
