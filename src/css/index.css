@@ -58,12 +58,24 @@ table {
     padding: 0.6em;
 }
 
+#searchButLang{
+    margin-bottom: 3%;
+    margin-top: 0%;
+    padding: 0.6em;
+}
+
 #search-heading {
   margin-top: 2%;  
   margin-left: 1.35%;
 }
 
 #search-output {
+  margin-top: 2%;  
+  margin-left: 1.35%;
+  
+}
+
+#search-output-word {
   margin-top: 2%;  
   margin-left: 1.35%;
   
@@ -100,8 +112,8 @@ table {
 
 .line {
   fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke: orangered;
+  stroke-width: 3px;
 }
 
 
