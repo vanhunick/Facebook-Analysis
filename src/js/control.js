@@ -54,8 +54,15 @@ function displayRandomData(){
     createPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.getMessageArray());
     genBarGraph(DPRandom);
-    showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
 
+    friendSearched(friends[0]);
+    wordSearched(words[0]);
+      
+    $('#search-output').html('Selected friend : <span style="color: orangered;">' + friends[0]);
+    $('#search-output-word').html('Selected word : <span style="color: orangered;">' + words[0]);
+
+
+    // showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
 }
 
 

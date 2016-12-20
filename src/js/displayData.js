@@ -117,5 +117,7 @@ function showFriendStats(friendString, messageDataArray){
 }
 
 function showWordStats(val,dataProcessor){
+  // Create some other stat table
 
+  showLineGraph(dataProcessor.wordUssageOverTime(val));
 }

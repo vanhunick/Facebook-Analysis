@@ -27,6 +27,12 @@ $(document).ready(function(){
 
     });
 
+
+    // Respond to search bar button being pressed for words
+     $("#searchButLang").click(function(){
+         var val = $('#search-words').val();
+        wordSearched(val);
+    }); 
     
 
     // Respond to enter being pressed in search bar for words
