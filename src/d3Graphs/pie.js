@@ -4,13 +4,13 @@ function showPie(dataSource) {
         height = 350,
         radius = Math.min(width, height) / 2;
 
-    var color = d3.scale.category10();
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    var arc = d3.svg.arc()
+    var arc = d3.arc()
         .outerRadius(radius)
         .innerRadius(0);
 
-    var pie = d3.layout.pie()
+    var pie = d3.pie()
         .sort(null)
         .value(function (d) { return d.count; });
 
@@ -22,11 +22,11 @@ function showPie(dataSource) {
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    var arc = d3.svg.arc()
+    var arc = d3.arc()
         .outerRadius(radius)
         .innerRadius(0);
 
-    var labelArc = d3.svg.arc()
+    var labelArc = d3.arc()
         .outerRadius(radius - 40)
         .innerRadius(radius - 40);
 
@@ -48,9 +48,11 @@ function showPie(dataSource) {
         .attr("transform", function (d) { return "translate(" + labelArc.centroid(d) + ")"; })
         .attr("dy", ".35em")
         .text(function (d) { return d.data.name; });
-}
 
-function type(d) {
+        function type(d) {
     d.count = +d.count;
     return d;
 }
+}
+
+
