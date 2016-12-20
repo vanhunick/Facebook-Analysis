@@ -9,7 +9,9 @@
     crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <link rel='stylesheet' href='../css/index.css' />
   <link rel='stylesheet' href='../css/d3.css' />
@@ -240,7 +242,15 @@
     </div>
 
 
-    <!--Table for word count  -->
+    <!--Row for line graph showing word and occourence over time-->
+    <div class="row">
+
+      <div class="col-md-12 text-left" id="word-time">
+
+      </div>
+    </div>
+
+    <!--Table for word count  
     <table class="table table-striped table-hover" id="wordTable">
       <thead>
         <tr>
@@ -250,7 +260,7 @@
       </thead>
       <tbody>
       </tbody>
-    </table>
+    </table>-->
   </div>
 </body>
 
@@ -259,6 +269,7 @@
 <!--D3 Graphs-->
 <script src="../d3Graphs/pie.js"></script>
 <script src="../d3Graphs/bar.js"></script>
+<script src="../d3Graphs/line.js"></script>
 
 <!--A random data generator-->
 <script src="../js/dataGen.js"></script>
