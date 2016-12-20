@@ -40,7 +40,7 @@ function loadedData(data){
 var dataGenerator = new DataGen();// Used to generate random data
 
 // Example data
-var DPRandom = new DataProcessor(dataGenerator.getMessageArray(100));
+var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));
 
 // Show random data to the user on first load
 function displayRandomData(){
@@ -54,6 +54,8 @@ function displayRandomData(){
     createPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.getMessageArray());
     genBarGraph(DPRandom);
+    showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
+
 }
 
 
@@ -83,6 +85,10 @@ function getWords(){
   return words;
 }
 
+function type(d) {
+  d.count = +d.count;
+  return d;
+}
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
