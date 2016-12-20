@@ -58,17 +58,18 @@ DataProcessor.prototype.createWordMap = function () {
 }
 
 DataProcessor.prototype.getUniqueWords = function () {
-    uw = [];
+    let uw = [];
 
         for (let i = 0; i < this.messageArray.length; i++) {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
-            if(uw.indexOf(words[j] == -1)){
+            if(uw.indexOf(words[j]) === -1){
                 uw.push(words[j]);
             }
         }
     }
+    console.log(uw);
     return uw;
 }
 
