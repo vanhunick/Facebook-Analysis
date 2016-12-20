@@ -11,7 +11,7 @@ const someWords = ["moldavia", "eclipsing", "minotaur", "lido", "halloween", "se
 const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
 // Months of the year
-const months = ["January", "Februaury", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["January", "february", "March", "April", "May", "June", "July", "august", "September", "October", "November", "December"];
 
 // Some random names
 const names = ["Candy Maske", "Faustino Regis", "Newton Masson", "Iris Lucier", "Cherilyn Meade", "Kelli Dyer",
