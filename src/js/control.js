@@ -25,12 +25,12 @@ function loadedData(data){
     // Add friends to the autocomplete
     updateAutocomplete();
     updateWordAutocomplete();
-    
+
     // d3.select("svg").selectAll("*").remove();
-    showLineGraph(DPUser.totalMessagesOverTime(),"stat-line");
+    showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time");
 
 
-    //draw the pie 
+    //draw the pie
     createPie(data);
 
     // Draw the bar graph
@@ -47,23 +47,23 @@ var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));
 
 // Show random data to the user on first load
 function displayRandomData(){
-    
+
     friends = DPRandom.listPeople(DPRandom.getMessageArray());
     words = DPRandom.getUniqueWords();
-    
+
     updateAutocomplete();
     updateWordAutocomplete();
-    
+
     createPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.getMessageArray());
     genBarGraph(DPRandom);
 
-    showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line");
+    showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
 
 
     friendSearched(friends[0]);
     wordSearched(words[0]);
-      
+
     $('#search-output').html('Selected friend : <span style="color: orangered;">' + friends[0]);
     $('#search-output-word').html('Selected word : <span style="color: orangered;">' + words[0]);
 
@@ -104,5 +104,3 @@ function type(d) {
 }
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-

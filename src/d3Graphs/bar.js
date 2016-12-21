@@ -1,4 +1,4 @@
-var margin = { top: 40, right: 20, bottom: 30, left: 50 },
+var margin = { top: 60, right: 20, bottom: 30, left: 50 },
     width = 550 - margin.left - margin.right,
     height = 350 - margin.top - margin.bottom;
 
@@ -53,6 +53,13 @@ function showYearBarGraph(dataInput) {
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
+
+    svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .attr('class','graph-title')
+        .text("Messages sent and recieved per year");
 
     function type(d) {
         d.frequency = +d.frequency;

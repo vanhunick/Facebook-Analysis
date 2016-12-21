@@ -1,7 +1,7 @@
 .axis path,
 .axis line {
   fill: none;
-  stroke: black;
+  stroke: white;
   shape-rendering: crispEdges;
 }
 
@@ -52,9 +52,21 @@
   stroke: #fff;
 }
 
+.axis text {
+   fill: white;
+}
+
 /*Line graph*/
 .line {
   fill: none;
   stroke: orangered;
   stroke-width: 3px;
+}
+
+.graph-title {
+  font-size: 24px;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /*Required for D3 chart title*/
+  fill : light-blue;
+  fill :  #00BDE8;
 }

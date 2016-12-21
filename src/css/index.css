@@ -4,13 +4,13 @@ body {
 }
 
 .well {
-  color: grey;
+  background: #2C303C;
 }
 
 .page-header {
     padding-bottom: 9.5px;
     margin: 42px 0 21px;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 2px solid black;
 }
 
 .header {
@@ -18,15 +18,11 @@ body {
 }
 
 #top-header {
-  color: white;
+  font-size: 300%;
+  color: black;
 }
 
-.graph-title {
-  font-size: 24px;
-  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  /*Required for D3 chart title*/
-  fill : orangered;
-}
+
 
 #up {
   width : 10em;
@@ -51,9 +47,16 @@ body {
 
 /*Table formatting*/
 table, td, th {
-    border: 1px solid #ddd;
+    border: 1px solid white;
     text-align: left;
+    color: white;
 }
+
+td, th {
+  
+    background-color: #2C303C;
+}
+
 
 table {
     border-collapse: collapse;
@@ -82,6 +85,7 @@ table {
 #data-instructions {
   margin-top: 2%;
   margin-bottom: 2%;
+  color: white;
 }
 
 .search-box {
@@ -100,9 +104,6 @@ table {
 #lf,#ld {
   margin-top: 2%;
 }
-
-
-
 
 
 /*Autocomplete*/

@@ -17,7 +17,7 @@ function createWordCountTable(data, numbRows) {
 }
 
 
-// 
+//
 function createStatisticsTable(dataStruct){
   let totMessages = 0; totSent = 0; totRec = 0; totWords = 0;
 
@@ -30,7 +30,7 @@ function createStatisticsTable(dataStruct){
         totRec++;
       }
 
-      totWords+= dataStruct[i].words.length; 
+      totWords+= dataStruct[i].words.length;
   }
   console.log(totSent + " " + totRec + " " + totMessages + " " + totWords );
 
@@ -43,16 +43,16 @@ function createStatisticsTable(dataStruct){
 
 // Create the pie chart
 function createPie(dataStruct){
-  
+
   let entry = {
       name: "",
-      count: 0 
+      count: 0
     };
 
   let peopleMap = {};
 
     for (let i = 0; i < dataStruct.length; i++) {
-      
+
       if(dataStruct[i].sender.toLowerCase() !== user.toLowerCase()){ // Ignore user messages
         if(peopleMap[dataStruct[i].sender.toLowerCase()] === undefined){
           peopleMap[dataStruct[i].sender.toLowerCase()] = 0;
@@ -75,7 +75,7 @@ function createPie(dataStruct){
   if(peopleArray.length <= 10){
     showPie(peopleArray);
   } else {
-    showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));  
+    showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));
   }
 }
 
@@ -83,13 +83,13 @@ function genBarGraph(proc){
   showYearBarGraph(proc.createYearCountMap());
 }
 
-// TODO 
+// TODO
 function showFriendStats(friendString, dataProcessor){
   let messageDataArray = dataProcessor.getMessageArray();
-  
+
   let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
 
-  
+
 
   for(let i = 0; i < messageDataArray.length; i++){
     totMessages++;
@@ -100,7 +100,7 @@ function showFriendStats(friendString, dataProcessor){
             if(messageDataArray[i].sender.toLowerCase() === user.toLowerCase()){
                 totSent++;
             } else {
-                totRec++;    
+                totRec++;
             }
             totWords+= messageDataArray[i].words.length;
         }
@@ -116,12 +116,14 @@ function showFriendStats(friendString, dataProcessor){
   $("#wordTableF").show();
 
 
-  // Show the line graph 
-  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line");
+  // Show the line graph
+  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "Messages Recieved over time from friend");
+
+  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "Messages Recieved");
 }
 
 function showWordStats(val,dataProcessor){
   // Create some other stat table
 
-  showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time");
+  showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
 }

@@ -172,6 +172,28 @@ DataProcessor.prototype.friendMessagesOverTime = function(friendName) {
     return entryArray;
 }
 
+DataProcessor.prototype.averageOverTotalMessages = function (totalArray, partArray) {
+    let adjustedArray = [];
+        console.log(totalArray.length + " " + partArray.length );
+
+    for(let i = 0; i < totalArray.length; i++){
+        let entry = totalArray[i];
+        for(let j = 0; j < partArray.length; j++){
+            let partEntry = partArray[j];
+            // console.log("entry" + entry.date + " part entry " + partEntry.date);
+            if(entry.date === partEntry.date){
+                let percentage = (partEntry.count / entry.count) * 100;
+                let newEntry = Object.create(entry);
+                newEntry.date = entry.date;
+                newEntry.count = percentage;
+                adjustedArray.push(newEntry);
+            }
+        }
+    }
+
+    return adjustedArray;
+}
+
 
 // Returns an array of entries where with a date and count for the number of messages sent on that date
 DataProcessor.prototype.totalMessagesOverTime = function () {
