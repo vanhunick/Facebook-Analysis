@@ -1,5 +1,5 @@
-function showLineGraph(input, divId) {
-    var margin = { top: 40, right: 20, bottom: 80, left: 50 },
+function showLineGraph(input, divId, title) {
+    var margin = { top: 40, right: 20, bottom: 80, left: 30 },
         width = 800 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -15,7 +15,11 @@ function showLineGraph(input, divId) {
 
     // Convert data into correct types
     for (let i = 0; i < data.length; i++) {
+        if(data[i].count < 1){
+            console.log("C " +data[i].count);
+        }
         data[i].count = +data[i].count;
+
         data[i].date = parseTime(data[i].date);
     }
 
@@ -55,4 +59,12 @@ function showLineGraph(input, divId) {
         .datum(data)
         .attr("class", "line")
         .attr("d", line);
+
+        //svg
+    g.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .attr('class','graph-title')
+        .text(title);
 }
