@@ -7,7 +7,7 @@ function showPie(dataSource) {
 
     var arc = d3.arc()
         .outerRadius(radius)
-        .innerRadius(0);
+        .innerRadius(radius - 70);
 
     var pie = d3.pie()
         .sort(null)
@@ -22,8 +22,8 @@ function showPie(dataSource) {
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     var arc = d3.arc()
-        .outerRadius(radius)
-        .innerRadius(0);
+        .outerRadius(radius - 10)
+        .innerRadius(radius - 70);
 
     var labelArc = d3.arc()
         .outerRadius(radius - 40)
@@ -47,6 +47,13 @@ function showPie(dataSource) {
         .attr("transform", function (d) { return "translate(" + labelArc.centroid(d) + ")"; })
         .attr("dy", ".35em")
         .text(function (d) { return d.data.name; });
+
+    g.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 40 - (height / 2))
+        .attr("text-anchor", "middle")
+        .attr('class','graph-title')
+        .text("Interactions");
 
     function type(d) {
         d.count = +d.count;
