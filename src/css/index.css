@@ -1,3 +1,12 @@
+body {
+	background: #2C303C;
+  background: #C6C8CA;
+}
+
+.well {
+  color: grey;
+}
+
 .page-header {
     padding-bottom: 9.5px;
     margin: 42px 0 21px;
@@ -6,9 +15,18 @@
 
 .header {
   color: orangered;
-  /*font-weight: bold;*/
 }
 
+#top-header {
+  color: white;
+}
+
+.graph-title {
+  font-size: 24px;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /*Required for D3 chart title*/
+  fill : orangered;
+}
 
 #up {
   width : 10em;
@@ -57,7 +75,7 @@ table {
 }
 
 .adjust {
-  margin-top: 2%;  
+  margin-top: 2%;
   margin-left: 1.35%;
 }
 
