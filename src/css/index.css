@@ -1,45 +1,43 @@
 body {
-	background: #2C303C;
-  background: #C6C8CA;
+  background: ghostwhite;
+}
+
+/*The very top heading of the page*/
+#top-header {
+  font-size: 300%;
+  color: black;
+}
+
+/*Sub heading under main heading*/
+#title{
+  color: orangered;
 }
 
 .well {
   background: #2C303C;
 }
 
+/*The horizontal bar across seperating sections*/
 .page-header {
     padding-bottom: 9.5px;
     margin: 42px 0 21px;
     border-bottom: 2px solid black;
 }
 
+/*The title of each section*/
 .header {
   color: orangered;
+  text-align: center;
 }
 
-#top-header {
-  font-size: 300%;
-  color: black;
-}
-
-
-
+/*Upload file button label*/
 #up {
   width : 10em;
   border-style: solid;
   border-width: 5px;
 }
 
-#title{
-  color: orangered;
-}
-
-.thumb {
-  height: 75px;
-  border: 1px solid #000;
-  margin: 10px 5px 0 0;
-}
-
+/*Button margins*/
 .btn{
   margin-top: 1%;
   margin-bottom: 1%;
@@ -53,10 +51,8 @@ table, td, th {
 }
 
 td, th {
-  
     background-color: #2C303C;
 }
-
 
 table {
     border-collapse: collapse;
@@ -82,10 +78,18 @@ table {
   margin-left: 1.35%;
 }
 
-#data-instructions {
+.data-instructions {
   margin-top: 2%;
   margin-bottom: 2%;
   color: white;
+}
+
+#lf,#ld {
+  margin-top: 2%;
+}
+
+.graph-background {
+  background-color: #292929;
 }
 
 .search-box {
@@ -99,12 +103,6 @@ table {
   margin-top: 0%;
   margin-left: 1.35%;
 }
-
-
-#lf,#ld {
-  margin-top: 2%;
-}
-
 
 /*Autocomplete*/
 .autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
