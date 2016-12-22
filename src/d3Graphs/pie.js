@@ -45,6 +45,7 @@ function showPie(dataSource) {
 
     g.append("text")
         .attr("transform", function (d) { return "translate(" + labelArc.centroid(d) + ")"; })
+        .attr("class","pieLabel")
         .attr("dy", ".35em")
         .text(function (d) { return d.data.name; });
 
