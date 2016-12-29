@@ -68,8 +68,13 @@ DataProcessor.prototype.getUniqueWords = function (caseSensitive) {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
-          let word = caseSensitive ? uw.indexOf(words[j]).toLowerCase : uw.indexOf(words[j]);
-            if(word === -1){
+          let word = caseSensitive ? words[j].toLowerCase() : words[j];
+          word = word.replace(".",""); // Remove dots on words
+          if(word === undefined){
+
+            return;
+          }
+            if(uw.indexOf(word) === -1){
                 uw.push(word);
             }
         }

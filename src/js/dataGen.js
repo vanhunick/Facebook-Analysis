@@ -4,7 +4,7 @@ const someWords = ["moldavia", "eclipsing", "minotaur", "lido", "halloween", "se
 	"bakeries", "memphian", "fubsiest", "pygmalion", "sotted", "yap", "dulcinea", "revelry", "cwo", "bluey",
 	"rifler", "delilah", "madrona", "mulliken", "bulldoze", "eddie", "cheney", "dysuria", "analogy", "annwn",
 	"dottrel", "phocine", "stoss", "unveering", "atiptoe", "mandarin", "weaponed", "solver", "defile", "tumuluses",
-	"ruminate", "dresser", "daira", "blankbook", "hague", "macled", "lowcased", "macled", "lowcased", "weirdieblankbook"];
+	"Ruminate.", "dresser", "daira", "blankbook", "hague", "macled", "lowcased", "macled", "lowcased", "weirdieblankbook"];
 
 
 // Days of the week
@@ -77,4 +77,3 @@ function getRandomInt(min, max) {
 	max = Math.floor(max);
 	return Math.floor(Math.random() * (max - min)) + min;
 }
-
