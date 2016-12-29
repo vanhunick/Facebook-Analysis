@@ -54,10 +54,10 @@ function createPie(dataStruct){
     for (let i = 0; i < dataStruct.length; i++) {
 
       if(dataStruct[i].sender.toLowerCase() !== user.toLowerCase()){ // Ignore user messages
-        if(peopleMap[dataStruct[i].sender.toLowerCase()] === undefined){
-          peopleMap[dataStruct[i].sender.toLowerCase()] = 0;
+        if(peopleMap[dataStruct[i].sender] === undefined){
+          peopleMap[dataStruct[i].sender] = 0;
         }
-        peopleMap[dataStruct[i].sender.toLowerCase()]++;
+        peopleMap[dataStruct[i].sender]++;
   }
   }
 

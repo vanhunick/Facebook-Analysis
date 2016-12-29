@@ -60,6 +60,7 @@ DataProcessor.prototype.createWordMap = function (caseSensitive) {
     return wordMap;
 }
 
+// Returns an array of unique words in the data
 DataProcessor.prototype.getUniqueWords = function (caseSensitive) {
     let uw = [];
 
@@ -101,6 +102,7 @@ DataProcessor.prototype.createYearCountMap = function (){
   }
   return wordArray;
 }
+
 
 DataProcessor.prototype.wordUssageOverTime = function(word) {
 
