@@ -41,7 +41,7 @@ DataProcessor.prototype.createWordMap = function (caseSensitive) {
 
         for (let j = 0; j < words.length; j++) {
           let word = caseSensitive ? words[j].toLowerCase() : words[j];
-            
+
             if (wordMap[word] === undefined) {
                 wordMap[word] = 0;
             }
@@ -60,19 +60,19 @@ DataProcessor.prototype.createWordMap = function (caseSensitive) {
     return wordMap;
 }
 
-DataProcessor.prototype.getUniqueWords = function () {
+DataProcessor.prototype.getUniqueWords = function (caseSensitive) {
     let uw = [];
 
         for (let i = 0; i < this.messageArray.length; i++) {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
-            if(uw.indexOf(words[j]) === -1){
-                uw.push(words[j]);
+          let word = caseSensitive ? uw.indexOf(words[j]).toLowerCase : uw.indexOf(words[j]);
+            if(word === -1){
+                uw.push(word);
             }
         }
     }
-    console.log(uw);
     return uw;
 }
 

@@ -28,7 +28,7 @@ function loadedData(data){
 
     // Assings the arrays for the autocomplete
     friends = DPUser.listPeople();
-    words = DPUser.getUniqueWords();
+    words = DPUser.getUniqueWords(true);
 
     // Add friends to the autocomplete
     updateAutocomplete();
@@ -53,7 +53,7 @@ function loadedData(data){
 function displayRandomData(){
 
     friends = DPRandom.listPeople(DPRandom.getMessageArray());
-    words = DPRandom.getUniqueWords();
+    words = DPRandom.getUniqueWords(true);
 
     updateAutocomplete();
     updateWordAutocomplete();
@@ -70,7 +70,6 @@ function displayRandomData(){
 
     $('#search-output').html('Selected friend : <span style="color: orangered;">' + friends[0]);
     $('#search-output-word').html('Selected word : <span style="color: orangered;">' + words[0]);
-
 
     // showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
 }
