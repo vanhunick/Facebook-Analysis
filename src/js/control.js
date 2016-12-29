@@ -50,8 +50,6 @@ function loadedData(data){
 }
 
 
-
-
 // Show random data to the user on first load
 function displayRandomData(){
 
@@ -66,7 +64,6 @@ function displayRandomData(){
     genBarGraph(DPRandom);
 
     showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
-
 
     friendSearched(friends[0]);
     wordSearched(words[0]);
@@ -127,36 +124,15 @@ function genBarGraph(proc){
 
 // TODO
 function showFriendStats(friendString, dataProcessor){
-  let messageDataArray = dataProcessor.getMessageArray();
+  let friendData = dataProcessor.createFriendMetaData(friendString);
 
-  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
-
-
-
-  for(let i = 0; i < messageDataArray.length; i++){
-    totMessages++;
-
-      if(messageDataArray[i].peopleInThread.length === 2){ // Could change later to apply to any thread
-        if(messageDataArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || messageDataArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()){
-          totMessagesPerson++;
-            if(messageDataArray[i].sender.toLowerCase() === user.toLowerCase()){
-                totSent++;
-            } else {
-                totRec++;
-            }
-            totWords+= messageDataArray[i].words.length;
-        }
-    }
-  }
-
-  $('#tmsF').html(totSent);
-  $('#tmrF').html(totRec);
-  $('#tmF').html(totMessagesPerson);
-  $('#twF').html(totWords);
-  $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
+  $('#tmsF').html(friendData.totalSent);
+  $('#tmrF').html(friendData.totalRecieved);
+  $('#tmF').html(friendData.totalMessages);
+  $('#twF').html(friendData.totalWords);
+  $('#pms').html((((friendData.totalSent + friendData.totalRecieved)) / friendData.totalMessages) * 100); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
   $("#wordTableF").show();
-
 
   // Show the line graph
   showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "Messages Recieved over time from friend");

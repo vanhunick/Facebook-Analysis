@@ -151,7 +151,7 @@ function getPeopleInThread(thread) {
       people[i] = people[i].replace(" ","");
     }
   }
-  console.log(people);
+
   return people;
 }
 

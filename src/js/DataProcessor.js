@@ -184,7 +184,6 @@ DataProcessor.prototype.friendMessagesOverTime = function(friendName) {
 
 DataProcessor.prototype.averageOverTotalMessages = function (totalArray, partArray) {
     let adjustedArray = [];
-        console.log(totalArray.length + " " + partArray.length );
 
     for(let i = 0; i < totalArray.length; i++){
         let entry = totalArray[i];
@@ -293,16 +292,16 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     let totWords = 0;
 
     for (let i = 0; i < this.messageArray.length; i++) {
-        console.log(this.messageArray.peopleInThread);
         if (this.messageArray[i].peopleInThread.length === 2) { // Could change later to apply to any thread
-            if (this.messageArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || this.messageArrayy[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()) {
+            if (this.messageArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase()
+            || this.messageArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()) {
                 totMessagesPerson++;
                 if (this.messageArray[i].sender.toLowerCase() === user.toLowerCase()) {
                     totSent++;
                 } else {
                     totRec++;
                 }
-                totWords += messageDataArray[i].words.length;
+                totWords += this.messageArray[i].words.length;
             }
         }
     }
