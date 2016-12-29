@@ -10,6 +10,12 @@ var friends = ["No data"];
 // Array of words for autocomplete searching
 var words = ["No data"];
 
+// Used to generate random data
+var dataGenerator = new DataGen();
+
+// Example data
+var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));
+
 // Called when the upload file button is pressed
 function handleFileSelect(evt) {
     handleFileSelect1(evt, loadedData); //TODO change to loadFile
@@ -19,6 +25,8 @@ function handleFileSelect(evt) {
 function loadedData(data){
     loaded = true;
     DPUser = new DataProcessor(data);
+
+    // Assings the arrays for the autocomplete
     friends = DPUser.listPeople();
     words = DPUser.getUniqueWords();
 
@@ -28,7 +36,6 @@ function loadedData(data){
 
     // d3.select("svg").selectAll("*").remove();
     showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time");
-
 
     //draw the pie
     createPie(data);
@@ -40,10 +47,7 @@ function loadedData(data){
     createStatisticsTable(DPUser.getMessageArray());
 }
 
-var dataGenerator = new DataGen();// Used to generate random data
 
-// Example data
-var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));
 
 // Show random data to the user on first load
 function displayRandomData(){
