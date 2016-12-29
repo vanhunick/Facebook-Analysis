@@ -1,3 +1,39 @@
+function createDataAndShowPie(dataStruct){
+    let entry = {
+        name: "",
+        count: 0
+      };
+
+    let peopleMap = {};
+
+      for (let i = 0; i < dataStruct.length; i++) {
+
+        if(dataStruct[i].sender.toLowerCase() !== user.toLowerCase()){ // Ignore user messages
+          if(peopleMap[dataStruct[i].sender] === undefined){
+            peopleMap[dataStruct[i].sender] = 0;
+          }
+          peopleMap[dataStruct[i].sender]++;
+        }
+    }
+
+    let peopleArray = [];
+
+      for (var key in peopleMap) {
+      let newEntry = Object.create(entry);
+      newEntry.name = key;
+      newEntry.count = peopleMap[key];
+      peopleArray.push(newEntry);
+    }
+
+    peopleArray.sort(function (a, b) { return a.count - b.count });
+
+    if(peopleArray.length <= 10){
+      showPie(peopleArray);
+    } else {
+      showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));
+    }
+}
+
 function showPie(dataSource) {
     var width = 350,
         height = 350,
@@ -60,6 +96,6 @@ function showPie(dataSource) {
         d.count = +d.count;
         return d;
     }
+
+
 }
-
-
