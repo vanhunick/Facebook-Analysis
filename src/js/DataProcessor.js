@@ -1,3 +1,5 @@
+// Constructor for a DataProcessor, has a range of different methods to mnodify the
+// structures date
 function DataProcessor(messageArray, user) {
     this.messageArray = messageArray;
     this.user = user;
@@ -26,7 +28,7 @@ DataProcessor.prototype.listPeople = function () {
 
 
 // Returns an array with entry objects that hold a word and the frequence it occours
-DataProcessor.prototype.createWordMap = function () {
+DataProcessor.prototype.createWordMap = function (caseSensitive) {
     let entry = {
         word: "",
         count: 0
@@ -38,7 +40,8 @@ DataProcessor.prototype.createWordMap = function () {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
-            let word = words[j];
+          let word = caseSensitive ? words[j].toLowerCase() : words[j];
+            
             if (wordMap[word] === undefined) {
                 wordMap[word] = 0;
             }
@@ -81,7 +84,7 @@ DataProcessor.prototype.createYearCountMap = function (){
   };
 
   let yearMap = {};
-  
+
   for (let i = 0; i <this.messageArray.length; i++) {
     if(yearMap[this.messageArray[i].timeData.year] === undefined){
       yearMap[this.messageArray[i].timeData.year] = 0;
@@ -100,7 +103,7 @@ DataProcessor.prototype.createYearCountMap = function (){
 }
 
 DataProcessor.prototype.wordUssageOverTime = function(word) {
-    
+
     // First filter out all the messages that contain the word we care about
     let relMessages = this.messageArray.filter(message => message.words.indexOf(word) !=-1);
 
@@ -120,7 +123,7 @@ DataProcessor.prototype.wordUssageOverTime = function(word) {
               dateMap[date] = 0;
             }
             dateMap[date] += wordMatch.length;
-    } 
+    }
 
     let entry = {
         date : "",
@@ -142,11 +145,11 @@ DataProcessor.prototype.wordUssageOverTime = function(word) {
 
 DataProcessor.prototype.friendMessagesOverTime = function(friendName) {
     let relMessages = this.messageArray.filter(message => message.sender === friendName);
-    
+
     let dateMap = {}
 
     for(let i = 0; i < relMessages.length; i++){
-        
+
         // Create a string out of the year and the month to use as a key in the map
         let date = relMessages[i].timeData.year + " " + relMessages[i].timeData.month;
 
@@ -241,7 +244,7 @@ DataProcessor.prototype.wordInMessageCount = function (message, word) {
 DataProcessor.prototype.getYears = function () {
     let yearArray = [];
       let yearMap = {};
-  
+
   for (let i = 0; i <this.messageArray.length; i++) {
     if(yearMap[this.messageArray[i].timeData.year] === undefined){
       yearMap[this.messageArray[i].timeData.year] = 0;
