@@ -4,6 +4,8 @@ var loaded = false;
 // Data processor with the user data once loaded is set to true
 var DPUser;
 
+var user = 'nicky van hulst';
+
 // Array of friends for autocomplete searching
 var friends = ["No data"];
 
@@ -38,14 +40,15 @@ function loadedData(data){
     showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time");
 
     //draw the pie
-    createPie(data);
+    createDataAndShowPie(data);
 
     // Draw the bar graph
     genBarGraph(DPUser);
 
     // The table with the users stats
-    createStatisticsTable(DPUser.getMessageArray());
+    createStatisticsTable(DPUser.createMetaData());
 }
+
 
 
 
@@ -58,8 +61,8 @@ function displayRandomData(){
     updateAutocomplete();
     updateWordAutocomplete();
 
-    createPie(DPRandom.getMessageArray());
-    createStatisticsTable(DPRandom.getMessageArray());
+    createDataAndShowPie(DPRandom.getMessageArray());
+    createStatisticsTable(DPRandom.createMetaData());
     genBarGraph(DPRandom);
 
     showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
@@ -75,20 +78,14 @@ function displayRandomData(){
 }
 
 
+// Decides if the random data or the user data should be used called when user searches friend
 function friendSearched(val){
-    if(loaded){
-        showFriendStats(val,DPUser);
-    } else {
-        showFriendStats(val,DPRandom);
-    }
+  showFriendStats(val, loaded ? DPUser : DPRandom);
 }
 
+// Decides if the random data or the user data should be used called when user searches word
 function wordSearched(val){
-    if(loaded){
-        showWordStats(val,DPUser);
-    } else {
-        showWordStats(val,DPRandom);
-    }
+    showWordStats(val, loaded ? DPUser : DPRandom);
 }
 
 // The loaded friends
@@ -101,9 +98,78 @@ function getWords(){
   return words;
 }
 
-function type(d) {
-  d.count = +d.count;
-  return d;
+// Displays the friend stats on the table
+function createStatisticsTable(metaData){
+  $('#tms').html(metaData.totalSent);
+  $('#tmr').html(metaData.totalRecieved);
+  $('#tm').html(metaData.totalMessages);
+  $('#tw').html(metaData.totalWords);
 }
+
+// Creates the table that displays the words and the count
+function createWordCountTable(data, numbRows) {
+
+  //First grab to table to add to
+  var table = document.getElementById("wordTable");
+
+  for (var i = 1; i < numbRows; i++) {
+    var row = table.insertRow(i);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = data[data.length - 1 - i].word;
+    cell2.innerHTML = data[data.length - 1 - i].count;
+  }
+}
+
+function genBarGraph(proc){
+  showYearBarGraph(proc.createYearCountMap());
+}
+
+// TODO
+function showFriendStats(friendString, dataProcessor){
+  let messageDataArray = dataProcessor.getMessageArray();
+
+  let totMessages = 0; totSent = 0; totRec = 0; totWords = 0; totMessagesPerson = 0;
+
+
+
+  for(let i = 0; i < messageDataArray.length; i++){
+    totMessages++;
+
+      if(messageDataArray[i].peopleInThread.length === 2){ // Could change later to apply to any thread
+        if(messageDataArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || messageDataArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()){
+          totMessagesPerson++;
+            if(messageDataArray[i].sender.toLowerCase() === user.toLowerCase()){
+                totSent++;
+            } else {
+                totRec++;
+            }
+            totWords+= messageDataArray[i].words.length;
+        }
+    }
+  }
+
+  $('#tmsF').html(totSent);
+  $('#tmrF').html(totRec);
+  $('#tmF').html(totMessagesPerson);
+  $('#twF').html(totWords);
+  $('#pms').html((((totSent + totRec)) / totMessages) * 100); // Percent of total messages sent
+  $('#statF').html("Statistics for you and " + friendString);
+  $("#wordTableF").show();
+
+
+  // Show the line graph
+  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "Messages Recieved over time from friend");
+
+  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "Messages Recieved");
+}
+
+
+function showWordStats(val,dataProcessor){
+  // Create some other stat table
+
+  showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
+}
+
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);

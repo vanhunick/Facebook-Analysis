@@ -273,7 +273,7 @@ DataProcessor.prototype.createMetaData = function () {
     for (let i = 0; i < this.messageArray.length; i++) {
         totMessages++;
 
-        if (this.messageArray[i].sender.toLowerCase() === user) {
+        if (this.messageArray[i].sender.toLowerCase() === user.toLowerCase()) {
             totSent++;
         } else {
             totRec++;
@@ -293,7 +293,7 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     let totWords = 0;
 
     for (let i = 0; i < this.messageArray.length; i++) {
-
+        console.log(this.messageArray.peopleInThread);
         if (this.messageArray[i].peopleInThread.length === 2) { // Could change later to apply to any thread
             if (this.messageArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase() || this.messageArrayy[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()) {
                 totMessagesPerson++;
@@ -308,11 +308,6 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     }
     return new FriendMetaData(totMessagesPerson, totSent, totRec, totWords);
 }
-
-
-
-
-
 
 // Object that stores general meta data about the messages in order to not have to recalulate it
 function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalRecieved) {

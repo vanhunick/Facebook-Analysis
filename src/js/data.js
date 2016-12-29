@@ -48,7 +48,7 @@ function handleFileSelect1(evt, callBackLoaded) {
   loadFileElem.style.width = 100 + '%';
   loadFileElem.textContent = 100 + '%';
 
-  // Set the html element with file data and find all threads    
+  // Set the html element with file data and find all threads
   let dataElem = document.createElement('html');
   dataElem.innerHTML = reader.result;
   threads = dataElem.getElementsByClassName('thread');
@@ -61,7 +61,7 @@ function handleFileSelect1(evt, callBackLoaded) {
   reader.readAsText(files[0]);
 }
 
-// The time data format 
+// The time data format
 function timeData(day, month, monthDay, year, time, timeZone, am) {
   this.day = day;
   this.month = month;
@@ -109,12 +109,12 @@ function createWorkableDataStructure(threads, callBackLoaded) {
     let messagesHead = thread.getElementsByClassName('message_header');
     let p = thread.getElementsByTagName('p');
 
-    
+
     for (let j = 0; j < messages.length; j++) {
 
       let timeData = getTimeData(meta[j].textContent); // Create the time data object
       let words = getWordsFromMessage(p[j].textContent); // Get the wors in the message
-      let user = users[j].textContent; // Get the person that sent the message 
+      let user = users[j].textContent; // Get the person that sent the message
 
       let tempMessageData = new messageData(user, peopleInThread, timeData, words);
       messageDataArray.push(tempMessageData);
@@ -123,7 +123,7 @@ function createWorkableDataStructure(threads, callBackLoaded) {
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
     elemLoadData.style.width = 100 + '%';
-    elemLoadData.textContent = 100 + '%'; 
+    elemLoadData.textContent = 100 + '%';
 
     // Call the function in control once the data is loaded
     callBackLoaded(messageDataArray);
@@ -132,7 +132,7 @@ function createWorkableDataStructure(threads, callBackLoaded) {
     setTimeout(processThread, 0);
   }
   }
-} 
+}
 }
 
 // Util function that returns people in thread given the thread
@@ -151,6 +151,7 @@ function getPeopleInThread(thread) {
       people[i] = people[i].replace(" ","");
     }
   }
+  console.log(people);
   return people;
 }
 
