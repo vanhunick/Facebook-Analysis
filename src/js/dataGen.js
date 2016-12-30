@@ -24,7 +24,7 @@ var DataGen = function(){};
 // Creates and returns a random message
 DataGen.prototype.createRandomMessage = function () {
 	let message = [];
-	for (let i = 0; i < getRandomInt(0, 10); i++) { // Create a random length message
+	for (let i = 0; i < getRandomInt(0, 20); i++) { // Create a random length message
 		message.push(someWords[getRandomInt(0, someWords.length)]); // Grab a random word out of the someWords array
 	}
 	return message;

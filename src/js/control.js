@@ -43,7 +43,7 @@ function loadedData(data){
     createDataAndShowPie(data);
 
     // Draw the bar graph
-    genBarGraph(DPUser);
+    showYearBarGraph(DPUser.createYearCountMap());
 
     // The table with the users stats
     createStatisticsTable(DPUser.createMetaData());
@@ -61,7 +61,8 @@ function displayRandomData(){
 
     createDataAndShowPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.createMetaData());
-    genBarGraph(DPRandom);
+    showYearBarGraph(DPRandom.createYearCountMap());
+
 
     showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
 
@@ -118,11 +119,7 @@ function createWordCountTable(data, numbRows) {
   }
 }
 
-function genBarGraph(proc){
-  showYearBarGraph(proc.createYearCountMap());
-}
-
-// TODO
+// Fills out the the statistics table and draws the graphs for friend statistics
 function showFriendStats(friendString, dataProcessor){
   let friendData = dataProcessor.createFriendMetaData(friendString);
 
@@ -135,15 +132,30 @@ function showFriendStats(friendString, dataProcessor){
   $("#wordTableF").show();
 
   // Show the line graph
-  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "Messages Recieved over time from friend");
+  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "MSG's Recieved from " + friendString);
 
-  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "Messages Recieved");
+  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "MSG's Recieved % from  " + friendString);
 }
 
 
 function showWordStats(val,dataProcessor){
   // Create some other stat table
+  // word-table
+  // Friend used with the most
 
+  // Grab data from
+  let wordStats = dataProcessor.createWordMetaData(val);
+
+  $('#word-table').html(
+    '<table class="table table-striped table-hover" id="wordTableF" style="width:50%">'+
+      '<thead><tr><th colspan="2" id="statF">Word statistics friends</th></tr></thead>'+
+          '<tbody>'+
+            '<tr><th>Total occourences</th><th id="twF">'+ wordStats.occourences +'</th></tr>'+
+            '<tr><th>Times sent</th><th id="tmF">'+ wordStats.sent +'</th></tr>'+
+            '<tr><th>Times recieved</th><th id="tmsF">'+ wordStats.recieved +'</th></tr>'+
+            '<tr><th>Percent total</th><th id="tmsF">'+ wordStats.percent +'</th></tr>'+
+          '</tbody>'+
+        '</table>' +"");
   showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
 }
 

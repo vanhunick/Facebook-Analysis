@@ -308,6 +308,33 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     return new FriendMetaData(totMessagesPerson, totSent, totRec, totWords);
 }
 
+DataProcessor.prototype.createWordMetaData = function (word) {
+  let occourences = 0;
+  let sent = 0;
+  let recieved = 0;
+  let totalWords = 0;
+
+  // First filter out all the messages that contain the word we care about
+  let relMessages = this.messageArray.filter(message => message.words.indexOf(word) !=-1);
+
+  for (let i = 0; i < relMessages.length; i++) {
+    // console.log(relMessages.sender )
+    let words = relMessages[i].words;
+    for(let j = 0; j < words.length; j++) {
+        if(words[j] === word){
+          if (relMessages[i].sender.toLowerCase() === user.toLowerCase()) { // Could change later to apply to any thread
+            sent++;
+          } else {
+            recieved++;
+          }
+          occourences++;
+        }
+    }
+    totalWords += relMessages[i].words.length;
+  }
+  return new WordMetaData(occourences,sent,recieved, (occourences / totalWords));
+}
+
 // Object that stores general meta data about the messages in order to not have to recalulate it
 function MetaData(totalMessages, totalWords, totalPeople, totalSent, totalRecieved) {
     this.totalMessages = totalMessages;
@@ -323,4 +350,11 @@ function FriendMetaData(totalMessages, totalSent, totalRecieved, totalWords) {
     this.totalSent = totalSent;
     this.totalRecieved = totalRecieved;
     this.totalWords = totalWords;
+}
+
+function WordMetaData(occourences,sent,recieved, percent) {
+  this.occourences = occourences;
+  this.sent = sent;
+  this.recieved = recieved;
+  this.percent = percent;
 }
