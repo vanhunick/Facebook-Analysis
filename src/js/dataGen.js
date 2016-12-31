@@ -19,13 +19,16 @@ const names = ["Nicky Van Hulst","Candy Maske", "Faustino Regis", "Newton Masson
 
 
 // The DataGen Ojbect
-var DataGen = function(){};
+var DataGen = function(words, names){
+	this.words = words;
+	this.names = names;
+};
 
 // Creates and returns a random message
 DataGen.prototype.createRandomMessage = function () {
 	let message = [];
 	for (let i = 0; i < getRandomInt(0, 20); i++) { // Create a random length message
-		message.push(someWords[getRandomInt(0, someWords.length)]); // Grab a random word out of the someWords array
+		message.push(this.words[getRandomInt(0, this.words.length)]); // Grab a random word out of the someWords array
 	}
 	return message;
 }
@@ -55,8 +58,8 @@ DataGen.prototype.createRandomTimeData = function () {
 DataGen.prototype.createRandomMessageData = function() {
 	let time = this.createRandomTimeData();
 	let message = this.createRandomMessage();
-	let sender = names[getRandomInt(0, names.length)];
-	let peopleInThread = [sender, names[getRandomInt(0, names.length)]]
+	let sender = this.names[getRandomInt(0, this.names.length)];
+	let peopleInThread = [sender, this.names[getRandomInt(0, this.names.length)]]
 
 	return new messageData(sender, peopleInThread, time, message);
 }

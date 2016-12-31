@@ -5,7 +5,7 @@ var assert = chai.assert;
 describe('Checking message array size', function() {
   it('Should have size 10', function() {
 
-    let dataGen = new DataGen();
+    let dataGen = new DataGen(someWords,names);
 
     assert.equal(dataGen.getMessageArray(10).length, 10);
   });
@@ -15,7 +15,7 @@ describe('Checking message array size', function() {
 describe('Checking message format', function() {
   it('attributes should all be defined', function() {
 
-    let dataGen = new DataGen();
+    let dataGen = new DataGen(someWords,names);
     let messageData = dataGen.getMessageArray(1)[0];
 
     assert(messageData.sender !== undefined, "Sender should not be undefined");
@@ -29,7 +29,7 @@ describe('Checking message format', function() {
 describe('Checking time data validity', function() {
   it('attributes of time data valid', function() {
 
-    let dataGen = new DataGen();
+    let dataGen = new DataGen(someWords,names);
     let messageData = dataGen.getMessageArray(1)[0];
     let timeDataTest = messageData.timeData;
 
