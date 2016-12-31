@@ -39,7 +39,10 @@ function showPie(dataSource) {
         height = 350,
         radius = Math.min(width, height) / 2;
 
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    var niceColors = ["#4D4D4D","#5DA5DA ","#FAA43A","#60BD68 ","#F17CB0","#B2912F","#B276B2","#DECF3F","#F15854","#FFFF00"];
+    // var color = d3.scaleOrdinal(d3.schemeCategory10);
+    var color = d3.scaleOrdinal(niceColors);
+    console.log(d3.schemeCategory10);
 
     var arc = d3.arc()
         .outerRadius(radius)
