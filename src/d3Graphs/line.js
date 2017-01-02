@@ -1,7 +1,7 @@
 function showLineGraph(input, divId, title) {
     var margin = { top: 60, right: 20, bottom: 40, left: 30 },
         width = 500 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 400 - margin.top - margin.bottom; 
 
     var svg = d3.select("#"+divId).append("svg")
         .attr("width", width + margin.left + margin.right)

@@ -13,7 +13,7 @@ var friends = ["No data"];
 var words = ["No data"];
 
 // Used to generate random data
-var dataGenerator = new DataGen();
+var dataGenerator = new DataGen(someWords,names);
 
 // Example data
 var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));

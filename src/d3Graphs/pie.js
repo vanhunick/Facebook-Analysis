@@ -27,10 +27,10 @@ function createDataAndShowPie(dataStruct){
 
     peopleArray.sort(function (a, b) { return a.count - b.count });
 
-    if(peopleArray.length <= 10){
+    if(peopleArray.length <= 5){
       showPie(peopleArray);
     } else {
-      showPie(peopleArray.splice(peopleArray.length-11, peopleArray.length-1));
+      showPie(peopleArray.splice(peopleArray.length-6, peopleArray.length-1));
     }
 }
 
