@@ -88,13 +88,6 @@ function showPie(dataSource) {
         .attr("dy", ".35em")
         .text(function (d) { return d.data.name; });
 
-    g.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 40 - (height / 2))
-        .attr("text-anchor", "middle")
-        .attr('class','graph-title')
-        .text("Interactions");
-
     function type(d) {
         d.count = +d.count;
         return d;

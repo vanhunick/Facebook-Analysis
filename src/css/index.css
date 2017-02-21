@@ -13,6 +13,16 @@ body {
   color: orangered;
 }
 
+.graph-title {
+    color: steelblue;
+    text-align: center;
+}
+
+.graph-subtitle {
+  color: white;
+  text-align: center;
+}
+
 .well {
   background: #2C303C;
 }
@@ -89,7 +99,7 @@ table {
 }
 
 .graph-background {
-  background-color: #292929;
+  /*background-color: #292929;*/
 }
 
 .search-box {
@@ -102,6 +112,10 @@ table {
   margin-bottom: 1%;
   margin-top: 0%;
   margin-left: 1.35%;
+}
+
+.rem-but {
+  margin: 3%;
 }
 
 /*Autocomplete*/

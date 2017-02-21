@@ -66,5 +66,3 @@ function showYearBarGraph(dataInput) {
         return d;
     }
 }
-
-

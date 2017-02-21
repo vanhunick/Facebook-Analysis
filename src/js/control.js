@@ -36,10 +36,11 @@ function loadedData(data){
     updateAutocomplete();
     updateWordAutocomplete();
 
-    // d3.select("svg").selectAll("*").remove();
+    $('#general-wrap').html("");
     showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time");
 
     //draw the pie
+
     createDataAndShowPie(data);
 
     // Draw the bar graph
@@ -49,6 +50,23 @@ function loadedData(data){
     createStatisticsTable(DPUser.createMetaData());
 }
 
+function getGeneralStatsHTML(rowNumber){
+  let outerWell = $("<div>", {id: "general-stats-"+rowNumber, "class": "well"}); // outer well
+  let row = $("<div>", {"class": "row text-left"}); // row
+  let barDiv = $("<div>", {id: "bar-mpy-"+rowNumber, "class": "col-md-6 text-center"}); // bar graph div
+  let pieDiv = $("<div>", {id: "pie-"+rowNumber, "class": "col-md-6 text-center"}); // pie graph div
+
+  row.append(barDiv);
+  row.append(pieDiv);
+  outerWell.append(row);
+  $('#general-wrap').append(outerWell);
+}
+
+getGeneralStatsHTML(0);
+
+function removeGeneralDataDiv(){
+  $("#general-stats").remove();
+}
 
 // Show random data to the user on first load
 function displayRandomData(){
@@ -62,6 +80,10 @@ function displayRandomData(){
     createDataAndShowPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.createMetaData());
     showYearBarGraph(DPRandom.createYearCountMap());
+    let gs= "general-stats";
+    let html = '<button class="btn btn-danger rem-but" onclick="removeGeneralDataDiv()" type="button" id="rem">Remove</button>';
+
+    $('#general-stats').append($(html));
 
 
     showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
@@ -73,6 +95,11 @@ function displayRandomData(){
     $('#search-output-word').html('Selected word : <span style="color: orangered;">' + words[0]);
 
     // showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
+}
+
+function removeMyself(id){
+  console.log("Removing " + id);
+    $('#'+id).remove();
 }
 
 
@@ -161,3 +188,5 @@ function showWordStats(val,dataProcessor){
 
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+

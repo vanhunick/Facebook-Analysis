@@ -65,7 +65,7 @@
           <ol type="1">
             <li>Extract Data</li>
             <li>Click the load file button</li>
-            <li>Find file names "messages" and press okay</li>
+            <li>Find file named "messages" and press okay</li>
             <li>Done!</li>
           </ol>
           </div>
@@ -107,48 +107,56 @@
 
   <!--General stats header-->
   <div class="page-header text-left">
-    <h2 class="header">General Stats</h2>
+    <h2 class="header">General Statistics</h2>
   </div>
 
   <!--Row for bar graph showing messages per year and pie-->
+  <div id="general-wrap">
+    <!--Section for table of statistics-->
+    <div class="well">
+      <div class="row">
+        <div class="col-md-6 text-left"><div class="col-md-12">
+          <table class="table table-striped table-hover" style="margin-top: 50px;" id="wordTable" style="width:100%">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <h4 style="color: orangered;"><b>Message statistics<b><h4></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Total Words -->
+              <tr><th><h5>Total words</h5></th><th id="tw">0</th></tr>
+              <!-- Total Messages -->
+              <tr><th><h5>Total Messages</h5></th><th id="tm">0</th></tr>
+              <!-- Total Messages sent -->
+              <tr><th><h5>Total Messages Sent</h5></th><th id="tms">0</th></tr>
+              <!-- Total Messages recieved -->
+              <tr><th><h5>Total Messages Recieved</h5></th><th id="tmr">0</th></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+        <!--Div for line graph-->
+        <div class="col-md-6" >
+          <div class="col-md-12 text-left " id="stat-line"></div>
+        </div>
+      </div>
+    </div>
+
+
+
   <div class="well">
-    <div class="row">
+    <div class="row text-left" id="general-stats">
       <div class="col-md-6 text-center" id="bar-mpy"></div>
-      <div class="col-md-6 text-center" id="pie"></div>
-    </div>
-  </div>
-
-  <!--Section for table of statistics-->
-  <div class="well">
-    <div class="row">
-      <div class="col-md-6 text-left"><div class="col-md-12">
-        <table class="table table-striped table-hover" style="margin-top: 50px;" id="wordTable" style="width:100%">
-          <thead>
-            <tr>
-              <th colspan="2">
-                <h4 style="color: orangered;"><b>Message statistics<b><h4></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Total Words -->
-            <tr><th><h5>Total words</h5></th><th id="tw">0</th></tr>
-            <!-- Total Messages -->
-            <tr><th><h5>Total Messages</h5></th><th id="tm">0</th></tr>
-            <!-- Total Messages sent -->
-            <tr><th><h5>Total Messages Sent</h5></th><th id="tms">0</th></tr>
-            <!-- Total Messages recieved -->
-            <tr><th><h5>Total Messages Recieved</h5></th><th id="tmr">0</th></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-      <!--Div for line graph-->
-      <div class="col-md-6" >
-        <div class="col-md-12 text-left " id="stat-line"></div>
+      <div class="col-md-6 text-center" id="pie">
+        <h3 class="graph-title">Top 5 people messaged</h3>
       </div>
     </div>
   </div>
+  </div>
+
+
 
   <!--Friend stats header-->
   <div class="page-header text-left">
@@ -192,11 +200,15 @@
 
   <!--Section for two line graphs messages per year-->
   <div class="well">
-    <div class="row">
+    <div class="row text-center">
       <div class="col-md-6 text-left">
+        <h3 class="graph-title">Percentage of messages recieved</h3>
+        <h4 class="graph-subtitle" id="sub-percent-recieved">From</h4>
         <div class="col-md-12 graph-background" id="friend-line"></div>
       </div>
       <div class="col-md-6 text-left">
+        <h3 class="graph-title">Messages recieved</h3>
+        <h4 class="graph-subtitle" id="sub-recieved">From</h4>
         <div class="col-md-12 graph-background" id="friend-line-1"></div>
       </div>
     </div>
@@ -263,11 +275,20 @@
 <!--Provides functions to get statistics about the data-->
 <script src="../js/DataProcessor.js"></script>
 
-<!--function to show the results of the data-->
-<script src="../js/displayData.js"></script>
-
 <!--Controls the flow of the website-->
 <script src="../js/control.js"></script>
 
 <!--Jquery script-->
 <script src="../js/jq.js"></script>
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92333205-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
