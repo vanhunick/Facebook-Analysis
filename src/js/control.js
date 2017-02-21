@@ -164,6 +164,7 @@ function showFriendStats(friendString, dataProcessor){
   showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "MSG's Recieved % from  " + friendString);
 }
 
+var initialLoad = true;
 
 function showWordStats(val,dataProcessor){
   // Create some other stat table
@@ -183,10 +184,16 @@ function showWordStats(val,dataProcessor){
             '<tr><th>Percent total</th><th id="tmsF">'+ wordStats.percent +'</th></tr>'+
           '</tbody>'+
         '</table>' +"");
-  showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
+if(initialLoad){
+  console.log("Initial Start");
+    showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
+    initialLoad = false;
+} else {
+  console.log("Updating");
+  updateLineGraph(dataProcessor.wordUssageOverTime(val),"word-time");
+}
+
 }
 
 
 document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-
