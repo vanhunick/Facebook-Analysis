@@ -17,9 +17,20 @@ function LineGraph(id,svg){
   this.yAxis = d3.axisLeft();
 }
 
-function updateLineGraph(data, id){
+function showLineGraph(data, divId, title){
+  let exists = false;
   lineGraphs.forEach(function(graph){
-      if(id === graph.id){
+    if(graph.id === divId){
+      updateLineGraph(data,graph);
+      exists = true;
+    }
+  });
+  if(!exists){
+    createNewLineGraph(data,divId,title);  
+  }
+}
+
+function updateLineGraph(data, graph){      
         // Convert data into correct types
         for (let i = 0; i < data.length; i++) {
             data[i].count = +data[i].count;
@@ -27,37 +38,34 @@ function updateLineGraph(data, id){
         }
         data.sort((a, b) => a.date - b.date);
 
-        graph.xAxis.scale(graph.x);
-        graph.yAxis.scale(graph.y);
-
         // Set the domains
         graph.x.domain(d3.extent(data, function (d) { return d.date; }));
         graph.y.domain(d3.extent(data, function (d) { return d.count; }));
 
+        graph.xAxis.scale(graph.x);
+        graph.yAxis.scale(graph.y);
 
         // Update the axis
         graph.svg.select('.yAxis').call(graph.yAxis);
         graph.svg.select('.xAxis').call(graph.xAxis);
 
 
-          var line = d3.line()
-              .x(function (d) { return graph.x(d.date); })
-              .y(function (d) { return graph.y(d.count); });
-            // Make the changes
+        var line = d3.line()
+            .x(function (d) { return graph.x(d.date); })
+            .y(function (d) { return graph.y(d.count); });
+    // Make the changes
     graph.svg.select(".line")
         .transition()   // change the line
         .duration(750)
         .attr("d", line(data));
-      }
-  });
 }
 
 // Only call the first time to create a specific graph
-function showLineGraph(data, divId, title) {
+function createNewLineGraph(data, divId, title) {
 
   var margin =  { top: 60, right: 20, bottom: 40, left: 30 };
-  var width = 500 - this.margin.left - this.margin.right;
-  var height = 400 - this.margin.top - this.margin.bottom;
+  var width = 500 - margin.left - margin.right;
+  var height = 400 - margin.top - margin.bottom;
     // First create and append the svg
     var svg = d3.select("#"+divId).append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -110,6 +118,4 @@ function showLineGraph(data, divId, title) {
         .attr("dy", "0.71em")
         .style("text-anchor", "end")
         .text("Frequency");
-
-
 }

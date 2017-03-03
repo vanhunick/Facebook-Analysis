@@ -16,7 +16,7 @@ var words = ["No data"];
 var dataGenerator = new DataGen(someWords,names);
 
 // Example data
-var DPRandom = new DataProcessor(dataGenerator.getMessageArray(10000));
+var DPRandom = new DataProcessor(dataGenerator.getMessageArray(1000));
 
 // Called when the upload file button is pressed
 function handleFileSelect(evt) {
@@ -79,11 +79,8 @@ function displayRandomData(){
 
     createDataAndShowPie(DPRandom.getMessageArray());
     createStatisticsTable(DPRandom.createMetaData());
-    showYearBarGraph(DPRandom.createYearCountMap());
+    showBarGraph(DPRandom.createYearCountMap(), "bar-mpy","Messages per year");
     let gs= "general-stats";
-    let html = '<button class="btn btn-danger rem-but" onclick="removeGeneralDataDiv()" type="button" id="rem">Remove</button>';
-
-    $('#general-stats').append($(html));
 
 
     showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
@@ -93,8 +90,6 @@ function displayRandomData(){
 
     $('#search-output').html('Selected friend : <span style="color: orangered;">' + friends[0]);
     $('#search-output-word').html('Selected word : <span style="color: orangered;">' + words[0]);
-
-    // showLineGraph(DPRandom.wordUssageOverTime("memphian")) // TEST WORD
 }
 
 function removeMyself(id){
@@ -184,15 +179,7 @@ function showWordStats(val,dataProcessor){
             '<tr><th>Percent total</th><th id="tmsF">'+ wordStats.percent +'</th></tr>'+
           '</tbody>'+
         '</table>' +"");
-if(initialLoad){
-  console.log("Initial Start");
     showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
-    initialLoad = false;
-} else {
-  console.log("Updating");
-  updateLineGraph(dataProcessor.wordUssageOverTime(val),"word-time");
-}
-
 }
 
 
