@@ -36,15 +36,24 @@ function loadedData(data){
     updateAutocomplete();
     updateWordAutocomplete();
 
-    $('#general-wrap').html("");
-    showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time");
+    // Set defaults
+    friendSearched(friends[0]);
+    wordSearched(words[0]);
+    let thehtml = 'Selected friend : <span style="color: orangered;">' + friends[0];
+    $('#search-output').html(thehtml);
+
+    thehtml = 'Selected Word : <span style="color: orangered;">' + words[0];
+    $('#search-output-word').html(thehtml);
+
+    // $('#general-wrap').html("");
+    showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time", "Messages count");
 
     //draw the pie
 
-    createDataAndShowPie(data);
+    showPie(data, "pie", "A great pie");
 
     // Draw the bar graph
-    showYearBarGraph(DPUser.createYearCountMap());
+    showBarGraph(DPUser.createYearCountMap(), 'bar-mpy', "Messages sent and recieved", "Messages count");
 
     // The table with the users stats
     createStatisticsTable(DPUser.createMetaData());
@@ -64,9 +73,6 @@ function getGeneralStatsHTML(rowNumber){
 
 getGeneralStatsHTML(0);
 
-function removeGeneralDataDiv(){
-  $("#general-stats").remove();
-}
 
 // Show random data to the user on first load
 function displayRandomData(){
@@ -77,13 +83,13 @@ function displayRandomData(){
     updateAutocomplete();
     updateWordAutocomplete();
 
-    createDataAndShowPie(DPRandom.getMessageArray());
+    showPie(DPRandom.getMessageArray(), "pie", "Top 5 people");
     createStatisticsTable(DPRandom.createMetaData());
-    showBarGraph(DPRandom.createYearCountMap(), "bar-mpy","Messages per year");
+    showBarGraph(DPRandom.createYearCountMap(), "bar-mpy","Messages per year","Messages count");
     let gs= "general-stats";
 
 
-    showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time");
+    showLineGraph(DPRandom.totalMessagesOverTime(),"stat-line", "Total Messages Over Time","Messages count");
 
     friendSearched(friends[0]);
     wordSearched(words[0]);
@@ -144,6 +150,7 @@ function createWordCountTable(data, numbRows) {
 // Fills out the the statistics table and draws the graphs for friend statistics
 function showFriendStats(friendString, dataProcessor){
   let friendData = dataProcessor.createFriendMetaData(friendString);
+  console.log(friendData);
 
   $('#tmsF').html(friendData.totalSent);
   $('#tmrF').html(friendData.totalRecieved);
@@ -154,9 +161,9 @@ function showFriendStats(friendString, dataProcessor){
   $("#wordTableF").show();
 
   // Show the line graph
-  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "MSG's Recieved from " + friendString);
+  showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "MSG's Recieved from " + friendString, "Total");
 
-  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "MSG's Recieved % from  " + friendString);
+  showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "MSG's Recieved % from  " + friendString, "Percentage (%)");
 }
 
 var initialLoad = true;
