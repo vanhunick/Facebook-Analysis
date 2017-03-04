@@ -1,16 +1,17 @@
 body {
   background: ghostwhite;
+  background: #FFFBFC;
 }
 
 /*The very top heading of the page*/
 #top-header {
   font-size: 300%;
-  color: black;
+  color: #30332E;
 }
 
 /*Sub heading under main heading*/
 #title{
-  color: orangered;
+  color: #2978A0;
 }
 
 .graph-title {
@@ -24,19 +25,19 @@ body {
 }
 
 .well {
-  background: #2C303C;
+  background: #ED7B84;
 }
 
 /*The horizontal bar across seperating sections*/
 .page-header {
     padding-bottom: 9.5px;
     margin: 42px 0 21px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #30332E;
 }
 
 /*The title of each section*/
 .header {
-  color: orangered;
+  color: #2978A0;
   text-align: center;
 }
 
@@ -61,7 +62,7 @@ table, td, th {
 }
 
 td, th {
-    background-color: #2C303C;
+    background-color: #2978A0;
 }
 
 table {

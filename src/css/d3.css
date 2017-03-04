@@ -8,9 +8,28 @@
   stroke: white;
 }
 
+.yAxis line{
+  stroke: white;
+}
+
+.yAxis, .yAxis{
+  fill: white;
+  shape-rendering:crispEdges;
+}
+
+.xAxis, .xAxis {
+  fill: white;
+  shape-rendering:crispEdges;
+}
+
+.xAxis line, .xAxis path,.yAxis line, .yAxis path {
+  fill: none;
+  stroke: white;
+}
+
 /*Bar graph color*/
 .bar {
-  fill: orangered;
+  fill: #2978A0;
 }
 
 /*Pie text*/
@@ -21,13 +40,13 @@
 
 /*Text color for line graphs*/
 .axis text {
-   fill: white;
+   fill: black;
 }
 
 /*Line graph line*/
 .line {
   fill: none;
-  stroke: orangered;
+  stroke: #2978A0;
   stroke-width: 3px;
 }
 
@@ -41,4 +60,12 @@
 /*The label of each slice of pie*/
 .pieLabel {
     fill: white;
+}
+
+.text {
+  shape-rendering: crispEdges;
+}
+
+.unit-text {
+  fill : #6987C9;
 }
