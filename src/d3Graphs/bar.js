@@ -15,20 +15,20 @@ function BarGraph(id,svg){
     this.yAxis = d3.axisLeft();
 }    
 
-function showBarGraph(data, divID, title){
+function showBarGraph(data, divID, title,yLabel){
     var exists = false;
     barGraphs.forEach(function(barGraph){
         if(barGraph.id === divID){
-            updateBarGraph(data,barGraph);
+            updateBarGraph(data,barGraph,yLabel);
             exists = true;
         }
     });
     if(!exists){
-        createNewBarGraph(data,divID,title);
+        createNewBarGraph(data,divID,title, yLabel);
     }
 }
 
-function createNewBarGraph(data, id, title){
+function createNewBarGraph(data, id, title, yLabel){
     var svg = d3.select('#'+id).append("svg")
         .attr("width", barWidth + barMargin.left + barMargin.right)
         .attr("height", barHeight + barMargin.top + barMargin.bottom)
@@ -45,14 +45,13 @@ function createNewBarGraph(data, id, title){
     barGraph.yAxis.scale(barGraph.y);
 
     barGraph.svg.append("g")
-        .attr("class", "y axis")
+        .attr("class", "yAxis")
         .call(barGraph.yAxis)
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Frequency");
+        .style("text-anchor", "end");
 
     barGraph.svg.selectAll(".bar")
         .data(data)
@@ -64,7 +63,7 @@ function createNewBarGraph(data, id, title){
         .attr("height", function (d) { return barHeight - barGraph.y(d.frequency); });
 
     barGraph.svg.append("g")
-        .attr("class", "x axis")
+        .attr("class", "xAxis")
         .attr("transform", "translate(0," + barHeight + ")")
         .call(barGraph.xAxis);
 
@@ -74,13 +73,31 @@ function createNewBarGraph(data, id, title){
         .attr("text-anchor", "middle")
         .attr('class','graph-title')
         .text(title);
+
+    barGraph.svg.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ -(barMargin.left/2 + 10) +","+( barMargin.top)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+        .style("font-size", "16px")
+        .attr("class", "unit-text")
+        .text(yLabel);
+
+    // Add year as the x-axis label
+    barGraph.svg.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ +(barWidth/2) +","+( barMargin.top + barHeight -barMargin.bottom)+")")  // text is drawn off the screen top left, move down and out and rotate
+        .style("font-size", "14px")
+        .attr("class", "unit-text")
+        .text("Date");
 }
 
 
 function updateBarGraph(data, graph){
+        console.log("Updating")
+        console.log(data)
+        
         // Set the domains
-        graph.x.domain(d3.extent(data, function (d) { return d.date; }));
-        graph.y.domain(d3.extent(data, function (d) { return d.count; }));
+        graph.x.domain(data.map(function (d) { return d.letter; }));
+        graph.y.domain([0, d3.max(data, function (d) { return d.frequency; })]);
 
         graph.xAxis.scale(graph.x);
         graph.yAxis.scale(graph.y);
@@ -89,11 +106,24 @@ function updateBarGraph(data, graph){
         graph.svg.select('.yAxis').call(graph.yAxis);
         graph.svg.select('.xAxis').call(graph.xAxis);
 
-        // Update bars
-        graph.svg.selectAll(".bar")
-        .data(data)
-        .attr("x", function (d) { return graph.x(d.letter); })
-        .attr("width", barGraph.x.bandwidth())
-        .attr("y", function (d) { return graph.y(d.frequency); })
-        .attr("height", function (d) { return barHeight - barGraph.y(d.frequency); });
+        // Update bars //todo fix
+        var selection = graph.svg.selectAll(".bar")
+            .data(data)
+            .attr("x", function (d) { return graph.x(d.letter); })
+            .attr("width", graph.x.bandwidth())
+            .attr("y", function (d) { return graph.y(d.frequency); })
+            .attr("height", function (d) { return barHeight - graph.y(d.frequency); });
+        
+
+
+        selection.data(data)
+            .enter()
+            .append("rect")  
+            .attr("class", "bar")
+            .attr("x", function (d) { return graph.x(d.letter); })
+            .attr("width", graph.x.bandwidth())
+            .attr("y", function (d) { return graph.y(d.frequency); })
+            .attr("height", function (d) { return barHeight - graph.y(d.frequency); });
+
+        selection.exit().remove();
 }

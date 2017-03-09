@@ -6,7 +6,7 @@ var parseTime = d3.timeParse("%Y %B"); // year month
 
 
 function LineGraph(id,svg){
-  this.margin =  { top: 60, right: 20, bottom: 40, left: 30 };
+  this.margin =  { top: 60, right: 20, bottom: 40, left: 50 };
   this.width = 500 - this.margin.left - this.margin.right;
   this.height = 400 - this.margin.top - this.margin.bottom;
   this.id = id;
@@ -17,20 +17,20 @@ function LineGraph(id,svg){
   this.yAxis = d3.axisLeft();
 }
 
-function showLineGraph(data, divId, title){
+function showLineGraph(data, divId, title,yLabel){
   let exists = false;
   lineGraphs.forEach(function(graph){
     if(graph.id === divId){
-      updateLineGraph(data,graph);
+      updateLineGraph(data,graph,yLabel);
       exists = true;
     }
   });
   if(!exists){
-    createNewLineGraph(data,divId,title);  
+    createNewLineGraph(data,divId,title, yLabel);  
   }
 }
 
-function updateLineGraph(data, graph){      
+function updateLineGraph(data, graph, yLabel){      
         // Convert data into correct types
         for (let i = 0; i < data.length; i++) {
             data[i].count = +data[i].count;
@@ -61,7 +61,7 @@ function updateLineGraph(data, graph){
 }
 
 // Only call the first time to create a specific graph
-function createNewLineGraph(data, divId, title) {
+function createNewLineGraph(data, divId, title,yLabel) {
 
   var margin =  { top: 60, right: 20, bottom: 40, left: 30 };
   var width = 500 - margin.left - margin.right;
@@ -116,6 +116,22 @@ function createNewLineGraph(data, divId, title) {
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
         .attr("dy", "0.71em")
-        .style("text-anchor", "end")
-        .text("Frequency");
+        .style("text-anchor", "end");
+
+    graph.svg.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ +(margin.left/2-5) +","+( margin.top+50)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+        .style("font-size", "14px")
+        .style("fill", "#6987C9")
+        .attr("class", "unit-text")
+        .text(yLabel);
+
+    // Add year as the x-axis label
+    graph.svg.append("text")
+        .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+        .attr("transform", "translate("+ +(width/2) +","+( margin.top + height + margin.bottom/2 + 20 )+")")  // text is drawn off the screen top left, move down and out and rotate
+        .style("font-size", "14px")
+        .style("fill", "#6987C9")
+        .attr("class", "unit-text")
+        .text("Date");
 }
