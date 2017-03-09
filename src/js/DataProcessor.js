@@ -189,7 +189,6 @@ DataProcessor.prototype.averageOverTotalMessages = function (totalArray, partArr
         let entry = totalArray[i];
         for(let j = 0; j < partArray.length; j++){
             let partEntry = partArray[j];
-            // console.log("entry" + entry.date + " part entry " + partEntry.date);
             if(entry.date === partEntry.date){
                 let percentage = (partEntry.count / entry.count) * 100;
                 let newEntry = Object.create(entry);
@@ -286,7 +285,6 @@ DataProcessor.prototype.createMetaData = function () {
 
 // Returns a friend meta data object
 DataProcessor.prototype.createFriendMetaData = function (friendString) {
-    console.log("In func" + friendString);
     let totMessagesPerson = 0;
     let totSent = 0;
     let totRec = 0;
@@ -331,7 +329,6 @@ DataProcessor.prototype.createWordMetaData = function (word) {
   let relMessages = this.messageArray.filter(message => message.words.indexOf(word) !=-1);
 
   for (let i = 0; i < relMessages.length; i++) {
-    // console.log(relMessages.sender )
     let words = relMessages[i].words;
     for(let j = 0; j < words.length; j++) {
         if(words[j] === word){

@@ -14,7 +14,7 @@ const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"
 const months = ["January", "february", "March", "April", "May", "June", "July", "august", "September", "October", "November", "December"];
 
 // Some random names
-const names = ["Nicky Van Hulst","Candy Maske", "Faustino Regis", "Newton Masson", "Iris Lucier", "Cherilyn Meade", "Kelli Dyer",
+const names = ["Jim Van House","Candy Maske", "Faustino Regis", "Newton Masson", "Iris Lucier", "Cherilyn Meade", "Kelli Dyer",
 	"Debera Eisenhart", "Beatris Adamek", "Jacquetta Asberry", "Herschel Whisler"];
 
 

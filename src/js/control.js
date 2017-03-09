@@ -99,14 +99,12 @@ function displayRandomData(){
 }
 
 function removeMyself(id){
-  console.log("Removing " + id);
     $('#'+id).remove();
 }
 
 
 // Decides if the random data or the user data should be used called when user searches friend
 function friendSearched(val){
-  console.log(val);
   showFriendStats(val, loaded ? DPUser : DPRandom);
 }
 
