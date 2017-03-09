@@ -26,11 +26,21 @@ function handleFileSelect(evt) {
 // Called when the user data is loaded
 function loadedData(data){
     loaded = true;
+
+    var oldDate = new Date();
+
+    
+
     DPUser = new DataProcessor(data);
+
 
     // Assings the arrays for the autocomplete
     friends = DPUser.listPeople();
+
     words = DPUser.getUniqueWords(true);
+
+    
+
 
     // Add friends to the autocomplete
     updateAutocomplete();
@@ -57,6 +67,8 @@ function loadedData(data){
 
     // The table with the users stats
     createStatisticsTable(DPUser.createMetaData());
+
+
 }
 
 function getGeneralStatsHTML(rowNumber){
@@ -149,7 +161,6 @@ function createWordCountTable(data, numbRows) {
 // Fills out the the statistics table and draws the graphs for friend statistics
 function showFriendStats(friendString, dataProcessor){
   let friendData = dataProcessor.createFriendMetaData(friendString);
-  console.log(friendData);
 
   $('#tmsF').html(friendData.totalSent);
   $('#tmrF').html(friendData.totalRecieved);

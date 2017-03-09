@@ -29,7 +29,6 @@ function handleFileSelect1(evt, callBackLoaded) {
   // files is a FileList of File objects. List some properties.
   var output = [];
   for (let i = 0, f; f = files[i]; i++) {
-    console.log("Name " + f.name);
     output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
       f.size, ' bytes, last modified: ',
       f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
@@ -51,9 +50,11 @@ function handleFileSelect1(evt, callBackLoaded) {
   // Set the html element with file data and find all threads
   let dataElem = document.createElement('html');
   dataElem.innerHTML = reader.result;
+
   threads = dataElem.getElementsByClassName('thread');
 
     // dataStruct = createWorkableDataStructure(threads);
+    oldDate = new Date();
     createWorkableDataStructure(threads, callBackLoaded);
   }
 
@@ -80,11 +81,13 @@ function messageData(sender, peopleInThread, timeData, words) {
   this.words = words;
 }
 
+var metric2 = 0;
+
 // Conerts the html structure into a workable data structure
 function createWorkableDataStructure(threads, callBackLoaded) {
 
   var thread = document.createElement('div');
-
+  
   processThread();
 
   function processThread(){
@@ -108,8 +111,10 @@ function createWorkableDataStructure(threads, callBackLoaded) {
     let messages = thread.getElementsByClassName('message');
     let messagesHead = thread.getElementsByClassName('message_header');
     let p = thread.getElementsByTagName('p');
+    
 
-
+    
+    
     for (let j = 0; j < messages.length; j++) {
 
       let timeData = getTimeData(meta[j].textContent); // Create the time data object
@@ -119,6 +124,8 @@ function createWorkableDataStructure(threads, callBackLoaded) {
       let tempMessageData = new messageData(user, peopleInThread, timeData, words);
       messageDataArray.push(tempMessageData);
     }
+
+    
     i++;
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
@@ -137,22 +144,7 @@ function createWorkableDataStructure(threads, callBackLoaded) {
 
 // Util function that returns people in thread given the thread
 function getPeopleInThread(thread) {
-  // Get the string that represents people in the thread
-  let index = 0;
-  while (thread.innerHTML.charAt(index) !== '<') {
-    index++;
-  }
-
-  let str = thread.innerHTML.substr(0, index);
-  let people = str.split(",");
-  for(let i = 0; i < people.length; i++){
-    people[i] = people[i].replace(/,/g, ""); // Remove the comma from each person
-    if(people[i].startsWith(" ")){
-      people[i] = people[i].replace(" ","");
-    }
-  }
-
-  return people;
+  return thread.innerHTML.substr(0, thread.innerHTML.indexOf('<')).split(',');
 }
 
 // Util function that returns a timeData object given the meta data from the message file

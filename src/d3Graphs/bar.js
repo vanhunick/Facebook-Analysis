@@ -92,8 +92,6 @@ function createNewBarGraph(data, id, title, yLabel){
 
 
 function updateBarGraph(data, graph){
-        console.log("Updating")
-        console.log(data)
         
         // Set the domains
         graph.x.domain(data.map(function (d) { return d.letter; }));

@@ -60,27 +60,27 @@ DataProcessor.prototype.createWordMap = function (caseSensitive) {
     return wordMap;
 }
 
+
 // Returns an array of unique words in the data
 DataProcessor.prototype.getUniqueWords = function (caseSensitive) {
-    let uw = [];
+    var object = {};
+    var r = [];
 
-        for (let i = 0; i < this.messageArray.length; i++) {
+    for (let i = 0; i < this.messageArray.length; i++) {
         let words = this.messageArray[i].words;
 
         for (let j = 0; j < words.length; j++) {
           let word = caseSensitive ? words[j].toLowerCase() : words[j];
           word = word.replace(".",""); // Remove dots on words
-          if(word === undefined){
-
-            return;
-          }
-            if(uw.indexOf(word) === -1){
-                uw.push(word);
-            }
+          object[word] = word;
         }
     }
-    return uw;
+    for(word in object){
+        r.push(object[word]);
+    }
+    return r;
 }
+
 
 // Creates a map where word is the key and value is the count
 DataProcessor.prototype.createYearCountMap = function (){
