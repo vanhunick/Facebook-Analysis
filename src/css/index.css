@@ -103,6 +103,10 @@ table {
   /*background-color: #292929;*/
 }
 
+#load-desc {
+ color: #2978A0;
+}
+
 .search-box {
   float:left;
   clear:left;

@@ -23,6 +23,8 @@ const elemLoadData = document.getElementById("loadData");
 
 // Loads file and creates data structure
 function handleFileSelect1(evt, callBackLoaded) {
+  $('#fancyLoad').show();
+
 
   var files = evt.target.files; // FileList object
 
@@ -44,8 +46,7 @@ function handleFileSelect1(evt, callBackLoaded) {
   reader.onload = function (e) {
 
   // Set the load bar to 100% as the file is now loaded
-  loadFileElem.style.width = 100 + '%';
-  loadFileElem.textContent = 100 + '%';
+  $('#load-desc').html('File Loaded');
 
   // Set the html element with file data and find all threads
   let dataElem = document.createElement('html');
@@ -99,8 +100,7 @@ function createWorkableDataStructure(threads, callBackLoaded) {
       lastLoadPercentage = percentDone;
       percentage = percentDone;
 
-      elemLoadData.style.width = percentage + '%';
-      elemLoadData.textContent = percentage + '%';
+      $('#load-desc').html("Loading conversation threads done " + i + " / " + threads.length);
     }
 
     thread.innerHTML = threads[i].innerHTML;
@@ -129,8 +129,13 @@ function createWorkableDataStructure(threads, callBackLoaded) {
     i++;
   if (i === threads.length) {// threads.length
     var elem = document.getElementById("loadData");
-    elemLoadData.style.width = 100 + '%';
-    elemLoadData.textContent = 100 + '%';
+    $('#load-desc').html("Loading conversation threads done " + i + " / " + threads.length);
+    $('#fancyLoad').fadeOut();
+    $('#load-desc').html('Loading done');
+    $('#personal-header').html('Showing personal data');
+    
+    // elemLoadData.style.width = 100 + '%';
+    // elemLoadData.textContent = 100 + '%';
 
     // Call the function in control once the data is loaded
     callBackLoaded(messageDataArray);
@@ -168,8 +173,9 @@ function updateProgress(evt) {
     var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
     // Increase the progress bar length.
     if (percentLoaded < 100) {
-      elem.style.width = percentLoaded + '%';
-      elem.textContent = percentLoaded + '%';
+      $('#load-desc').html("Loading file done " + percentLoaded + "%");
+      // elem.style.width = percentLoaded + '%';
+      // elem.textContent = percentLoaded + '%';
     }
   }
 }

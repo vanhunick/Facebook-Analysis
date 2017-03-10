@@ -1,14 +1,12 @@
 $(document).ready(function(){
     // Hides the loading bars
-    $('#lf').hide();
-    $('#ld').hide();
+    $('#fancyLoad').hide();
+    $('#fancyLoadHead').hide();
 
     $("#wordTableF").hide();
 
     // Shows the loadings bars when the user clicks load file
     $('#files').click(function(){
-        $('#lf').show();
-        $('#ld').show();
     });
 
     // Respond to search bar button being pressed for friend search

@@ -25,6 +25,7 @@ function handleFileSelect(evt) {
 
 // Called when the user data is loaded
 function loadedData(data){
+    $('#lf , #ld').fadeOut();
     loaded = true;
 
     var oldDate = new Date();
