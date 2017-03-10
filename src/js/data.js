@@ -3,6 +3,9 @@ if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
   alert('The File APIs are not fully supported in this browser.');
 }
 
+// The name of the user
+var user;
+
 // Used for updating load bar
 var lastLoadPercentage = 0;
 
@@ -20,6 +23,7 @@ const loadFileElem = document.getElementById("loadFile");
 
 // The load bar bar element
 const elemLoadData = document.getElementById("loadData");
+
 
 // Loads file and creates data structure
 function handleFileSelect1(evt, callBackLoaded) {
@@ -53,6 +57,14 @@ function handleFileSelect1(evt, callBackLoaded) {
   dataElem.innerHTML = reader.result;
 
   threads = dataElem.getElementsByClassName('thread');
+
+  // Find the username of the person by looking at the title
+  var title = dataElem.getElementsByTagName('title')[0].innerHTML;
+  var index = title.indexOf('-')-1;
+  user = title.substr(0,index)
+  
+  
+
 
     // dataStruct = createWorkableDataStructure(threads);
     oldDate = new Date();
@@ -105,21 +117,23 @@ function createWorkableDataStructure(threads, callBackLoaded) {
 
     thread.innerHTML = threads[i].innerHTML;
 
-    let peopleInThread = getPeopleInThread(thread);
-    let users = thread.getElementsByClassName('user');
+    
+    
     let meta = thread.getElementsByClassName('meta');
     let messages = thread.getElementsByClassName('message');
+    let peopleInThread = getPeopleInThread(messages);
     let messagesHead = thread.getElementsByClassName('message_header');
     let p = thread.getElementsByTagName('p');
     
-
-    
+    // Object where each property is a person
     
     for (let j = 0; j < messages.length; j++) {
 
       let timeData = getTimeData(meta[j].textContent); // Create the time data object
       let words = getWordsFromMessage(p[j].textContent); // Get the wors in the message
-      let user = users[j].textContent; // Get the person that sent the message
+      // let user = users[j].textContent; // Get the person that sent the message
+
+      let user = messages[j].getElementsByClassName('user')[0].innerHTML;      
 
       let tempMessageData = new messageData(user, peopleInThread, timeData, words);
       messageDataArray.push(tempMessageData);
@@ -133,9 +147,6 @@ function createWorkableDataStructure(threads, callBackLoaded) {
     $('#fancyLoad').fadeOut();
     $('#load-desc').html('Loading done');
     $('#personal-header').html('Showing personal data');
-    
-    // elemLoadData.style.width = 100 + '%';
-    // elemLoadData.textContent = 100 + '%';
 
     // Call the function in control once the data is loaded
     callBackLoaded(messageDataArray);
@@ -148,8 +159,24 @@ function createWorkableDataStructure(threads, callBackLoaded) {
 }
 
 // Util function that returns people in thread given the thread
-function getPeopleInThread(thread) {
-  return thread.innerHTML.substr(0, thread.innerHTML.indexOf('<')).split(',');
+// function getPeopleInThread(thread) {
+//   return thread.innerHTML.substr(0, thread.innerHTML.indexOf('<')).split(',');
+// }
+
+// Util function that returns people in thread given the thread
+function getPeopleInThread(messages) {
+  const uniquePeople = {};
+
+  for(let i = 0; i < messages.length; i++){
+    let user = messages[i].getElementsByClassName('user')[0].innerHTML;      
+    uniquePeople[user] = user;
+  }
+
+  const peopleInThread = [];
+  for(person in uniquePeople){
+    peopleInThread.push(uniquePeople[person]);
+  }
+  return peopleInThread;
 }
 
 // Util function that returns a timeData object given the meta data from the message file

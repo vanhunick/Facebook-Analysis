@@ -291,19 +291,9 @@ DataProcessor.prototype.createFriendMetaData = function (friendString) {
     let totWords = 0;
     let totLetters  = 0;
 
-    // New
-    this.messageArray.forEach( m => {
-        if(m.sender.toLowerCase() === friendString.toLowerCase()){
-            totMessagesPerson++;
-            totWords += this.messageArray[i].words.length;
-                
-        }            
-    });
-
     // People in thread no longer the names
     for (let i = 0; i < this.messageArray.length; i++) {
         if (this.messageArray[i].peopleInThread.length === 2) { // Could change later to apply to any thread
-            
             if (this.messageArray[i].peopleInThread[0].toLowerCase() === friendString.toLowerCase()
             || this.messageArray[i].peopleInThread[1].toLowerCase() === friendString.toLowerCase()) {
                 totMessagesPerson++;

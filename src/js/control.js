@@ -4,7 +4,7 @@ var loaded = false;
 // Data processor with the user data once loaded is set to true
 var DPUser;
 
-var user = 'nicky van hulst';
+var user = 'Jim Van House';
 
 // Array of friends for autocomplete searching
 var friends = ["No data"];
@@ -18,6 +18,9 @@ var dataGenerator = new DataGen(someWords,names);
 // Example data
 var DPRandom = new DataProcessor(dataGenerator.getMessageArray(1000));
 
+var d3Format = d3.format(".4r"); // Used to format numbers displayed
+
+
 // Called when the upload file button is pressed
 function handleFileSelect(evt) {
     handleFileSelect1(evt, loadedData); //TODO change to loadFile
@@ -25,7 +28,7 @@ function handleFileSelect(evt) {
 
 // Called when the user data is loaded
 function loadedData(data){
-    $('#lf , #ld').fadeOut();
+    $('#userTitle').html('Hello ' + user);
     loaded = true;
 
     var oldDate = new Date();
@@ -56,7 +59,6 @@ function loadedData(data){
     thehtml = 'Selected Word : <span style="color: orangered;">' + words[0];
     $('#search-output-word').html(thehtml);
 
-    // $('#general-wrap').html("");
     showLineGraph(DPUser.totalMessagesOverTime(),"stat-line", " Total Messages Over Time", "Messages count");
 
     //draw the pie
@@ -68,8 +70,6 @@ function loadedData(data){
 
     // The table with the users stats
     createStatisticsTable(DPUser.createMetaData());
-
-
 }
 
 function getGeneralStatsHTML(rowNumber){
@@ -167,7 +167,8 @@ function showFriendStats(friendString, dataProcessor){
   $('#tmrF').html(friendData.totalRecieved);
   $('#tmF').html(friendData.totalMessages);
   $('#twF').html(friendData.totalWords);
-  $('#pms').html((((friendData.totalSent + friendData.totalRecieved)) / friendData.totalMessages) * 100); // Percent of total messages sent
+  $('#pms').html((friendData.totalSent / friendData.totalRecieved) * 100); // Percent of total messages sent
+  $('#pms').html(("1 :" + d3Format((friendData.totalRecieved / friendData.totalSent)))); // Percent of total messages sent
   $('#statF').html("Statistics for you and " + friendString);
   $("#wordTableF").show();
 
@@ -194,7 +195,7 @@ function showWordStats(val,dataProcessor){
             '<tr><th>Total occourences</th><th id="twF">'+ wordStats.occourences +'</th></tr>'+
             '<tr><th>Times sent</th><th id="tmF">'+ wordStats.sent +'</th></tr>'+
             '<tr><th>Times recieved</th><th id="tmsF">'+ wordStats.recieved +'</th></tr>'+
-            '<tr><th>Percent total</th><th id="tmsF">'+ wordStats.percent +'</th></tr>'+
+            '<tr><th>Percent total</th><th id="tmsF">'+ d3Format(wordStats.percent) +'</th></tr>'+
           '</tbody>'+
         '</table>' +"");
     showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
