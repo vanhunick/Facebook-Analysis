@@ -199,20 +199,31 @@
   </div>
 
   <!--Section for two line graphs messages per year-->
-  <div class="well">
+  <!--<div class="well">
     <div class="row text-center">
       <div class="col-md-6 text-left">
-        <!-- <h3 class="graph-title">Percentage of messages recieved</h3> -->
-        <!-- <h4 class="graph-subtitle" id="sub-percent-recieved">From</h4> -->
         <div class="col-md-12 graph-background" id="friend-line"></div>
       </div>
       <div class="col-md-6 text-left">
-        <!-- <h3 class="graph-title">Messages recieved</h3> -->
-        <!-- <h4 class="graph-subtitle" id="sub-recieved">From</h4> -->
         <div class="col-md-12 graph-background" id="friend-line-1"></div>
       </div>
     </div>
+  </div>-->
+
+  <div class="well">
+    <div class="row text-center">
+      <h4 id="friend-line-title" class="line-title"></h4>
+      <div class="col-md-12 text-center" id="friend-line"></div> 
+    </div>
   </div>
+
+  <div class="well">
+    <div class="row text-center">
+      <h4 id="friend-line-1-title" class="line-title"></h4>
+        <div class="col-md-12 text-center" id="friend-line-1"></div>
+    </div>
+  </div>
+
 
   <!--Page header for language stats-->
   <div class="page-header text-left">
@@ -244,8 +255,15 @@
   <!--Row for line graph showing word and occourence over time-->
   <div class="well">
     <div class="row">
-      <div class="col-md-6 text-left" id="word-time-percent"></div>
-      <div class="col-md-6 text-left" id="word-time"></div>
+      <h4 id="word-time-percent-title" class="line-title"></h4>
+      <div class="col-md-12 text-center" id="word-time-percent"></div>
+    </div>
+  </div>
+
+  <div class="well">
+    <div class="row">      
+      <h4 id="word-time-title" class="line-title"></h4>
+      <div class="col-md-12 text-center" id="word-time"></div>
     </div>
   </div>
 

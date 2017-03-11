@@ -73,6 +73,7 @@ function loadedData(data){
 }
 
 function getGeneralStatsHTML(rowNumber){
+  return;
   let outerWell = $("<div>", {id: "general-stats-"+rowNumber, "class": "well"}); // outer well
   let row = $("<div>", {"class": "row text-left"}); // row
   let barDiv = $("<div>", {id: "bar-mpy-"+rowNumber, "class": "col-md-6 text-center"}); // bar graph div
@@ -173,8 +174,11 @@ function showFriendStats(friendString, dataProcessor){
   $("#wordTableF").show();
 
   // Show the line graph
+  
+  $('#friend-line-1-title').html("MSG's Recieved from " + friendString, "Total");
   showLineGraph(dataProcessor.friendMessagesOverTime(friendString),"friend-line-1", "MSG's Recieved from " + friendString, "Total");
 
+  $('#friend-line-title').html("MSG's Recieved % from  " + friendString, "Percentage (%)");
   showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalMessagesOverTime(),dataProcessor.friendMessagesOverTime(friendString)),"friend-line", "MSG's Recieved % from  " + friendString, "Percentage (%)");
 }
 
@@ -199,11 +203,12 @@ function showWordStats(val,dataProcessor){
           '</tbody>'+
         '</table>' +"");
 
-
+    $('#word-time-percent-title').html('Percentage of word "'+val+'" over time');
 
     showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalWordsOverTime(),dataProcessor.wordUssageOverTime(val)),"word-time-percent", "Word's Recieved % from  " + val, "Percentage (%)");
 
-    showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
+    $('#word-time-title').html('Number of times "'+val+'" is sent and recieved');
+    showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time", "Frequency");
 }
 
 
