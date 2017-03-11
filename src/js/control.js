@@ -198,6 +198,11 @@ function showWordStats(val,dataProcessor){
             '<tr><th>Percent total</th><th id="tmsF">'+ d3Format(wordStats.percent) +'</th></tr>'+
           '</tbody>'+
         '</table>' +"");
+
+
+
+    showLineGraph(dataProcessor.averageOverTotalMessages(dataProcessor.totalWordsOverTime(),dataProcessor.wordUssageOverTime(val)),"word-time-percent", "Word's Recieved % from  " + val, "Percentage (%)");
+
     showLineGraph(dataProcessor.wordUssageOverTime(val),"word-time", "Word Frequency over time");
 }
 

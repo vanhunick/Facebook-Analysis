@@ -145,7 +145,6 @@ DataProcessor.prototype.wordUssageOverTime = function(word) {
         newEntry.count = dateMap[key];
         entryArray.push(newEntry);
   }
-
     return entryArray;
 }
 
@@ -215,6 +214,38 @@ DataProcessor.prototype.totalMessagesOverTime = function () {
               dateMap[date] = 0;
             }
             dateMap[date] ++;
+    }
+
+    let entry = {
+        date : "",
+        count : 0
+    }
+
+    let entryArray = [];
+
+    for (var key in dateMap) {
+        let newEntry = Object.create(entry);
+        newEntry.date = key;
+        newEntry.count = dateMap[key];
+        entryArray.push(newEntry);
+  }
+    return entryArray;
+}
+
+
+DataProcessor.prototype.totalWordsOverTime = function () {
+        let dateMap = {};
+
+    for(let i = 0; i < this.messageArray.length; i++){
+        let words = this.messageArray[i];
+
+        // Create a string out of the year and the month to use as a key in the map
+        let date = this.messageArray[i].timeData.year + " " + this.messageArray[i].timeData.month;
+
+            if(dateMap[date] === undefined){
+              dateMap[date] = 0;
+            }
+            dateMap[date] += words.words.length; // Add all the words in the array
     }
 
     let entry = {
